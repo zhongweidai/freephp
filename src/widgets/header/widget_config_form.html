@@ -1,0 +1,23 @@
+<!--挂件属性-->
+<div class="ct J_scroll_fixed">
+    <div class="pop_cont">
+        <dl class="cc">
+            <dt>挂件名称：</dt>
+            <dd><span class="must_red">*</span><input type="text"  class="input length_5" name="widget_name" value="{$options['widget_name']}"></dd>
+        </dl>
+        <dl class="cc">
+            <dt>模板选择：</dt>
+            <dd>
+                {pc:widget action="tplList" widget_code="$common_data[widget_code]"}
+                <select class="select_5 mr10" name="widget_tpl_id">
+                {loop $data $v}
+                    <option value="{$v['ID']}" {if $v['ID'] == $options['widget_tpl_id']}selected="selected"{/if}>{$v['TPL_NAME']}</option>
+                {/loop}
+                </select>
+                {/pc}
+                <span class="gray"></span>
+            </dd>
+        </dl>
+
+    </div>
+</div>

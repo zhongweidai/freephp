@@ -1,0 +1,617 @@
+/*隐藏模块管理按钮*/
+.njc_main, .njt_main, .njw_main, .design_mtop_bgn{margin-top:180px; background:none;}
+.design_mode_edit{
+	display:none;
+}
+.design_layout_hd{
+	cursor:move;
+	display:block;
+	height:35px;
+	line-height:35px;
+}
+/*
+===================
+弹窗管理
+===================
+*/
+.pop_design{
+	width:580px;
+	height:460px;
+	padding:0 10px;
+}
+/*头部*/
+.pop_design .hd{
+	padding-top:5px;
+	border-bottom:1px solid #ddd;
+	height:25px;
+	margin:0 0 10px;
+}
+.pop_design .hd .del{
+	float:right;
+}
+.pop_design .hd li{
+	float:left;
+	margin-right:3px;
+}
+.pop_design .hd li a{
+	display:block;
+	float:left;
+	padding:3px 10px;
+	border:1px solid #e4e4e4;
+	border-bottom:0;
+	background:#f6f6f6;
+}
+.pop_design .hd li a:hover{
+	text-decoration:none;
+	background:#f9f9f9;
+	color:#333;
+}
+.pop_design .hd li.current a{
+	background:#fff;
+	color:#333;
+	font-weight:700;
+	padding-top:4px;
+	margin-bottom:-1px;
+	border-color:#ddd;
+}
+/*内容区域*/
+.pop_design .ct{
+	height:370px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	position:relative;
+}
+/*设置*/
+.pop_design .pop_cont{
+	padding:0 5px 15px;
+}
+.pop_design .pop_cont dl{
+	padding:5px 0;
+}
+.pop_design .hr{
+	height:1px;
+	background:#ccc;
+	padding:0;
+	margin:10px 0;
+}
+/*箭头，展开收起*/
+.pop_design .arrow_up,
+.pop_design .arrow_down{
+	padding-left:14px;
+	color:#333;
+	margin-right:20px;
+}
+.pop_design .arrow_up{
+	background:url(../images/icon/arrow_up_black.png) 0 center no-repeat;
+}
+.pop_design .arrow_down{
+	background:url(../images/icon/arrow_down_black.png) 0 center no-repeat;
+}
+/*隐藏内容*/
+.pop_design .down_hidden{
+	background:#f7f7f7;
+	padding:10px 0;
+	margin:10px 0;
+}
+
+/*
+===================
+表格排序列表
+===================
+*/
+.pop_design_tablelist{
+	width:100%;
+	table-layout:fixed;
+	border-top:1px solid #e4e4e4;
+	margin-bottom:10px;
+}
+.pop_design_tablelist thead td,
+.pop_design_tablelist thead th{
+	background:#f7f7f7;
+}
+.pop_design_tablelist thead td select{
+	padding:1px;
+	line-height:22px;
+	height:22px;
+}
+.pop_design_tablelist td,
+.pop_design_tablelist th{
+	padding:5px 0;
+	border-bottom:1px solid #e4e4e4;
+}
+.pop_design_tablelist th{
+	padding-left:10px;
+}
+.pop_design_tablelist th input{
+	margin:0;
+	padding:0;
+}
+.pop_design_tablelist .subject{
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	line-height:18px;
+	height:18px;
+	overflow:hidden;
+}
+
+/*
+===================
+模块模板
+===================
+*/
+.pop_design_code{
+	height:170px;
+}
+.pop_design_code textarea{
+	width:566px;
+	height:120px;
+	margin-bottom:5px;
+	font-family:"Courier New", Courier, monospace;
+}
+.pop_design_case{
+	height:200px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+/*
+===================
+颜色筛选
+===================
+*/
+.color_pick{
+	border:1px solid #ccc;
+	padding:2px 13px 2px 3px;
+	background:#fff url(../images/icon/arrow_down_black.png) 40px center no-repeat;
+	display:inline-block;
+	cursor:pointer;
+	height:20px;
+	overflow:hidden;
+	vertical-align:middle;
+	position:relative;
+	line-height:normal;
+}
+.color_pick:hover{
+	background-color:#fffbde;
+}
+.color_pick.color_current{
+	border-color:#aaa #aaa #555;
+	background-color:#fffbde;
+}
+.color_pick em{
+	height:20px;
+	width:34px;
+	display:inline-block;
+}
+.color_pick.color_big{
+	background-image:none;
+	width:80px;
+	padding:3px;
+	height:60px;
+	text-align:center;
+	color:#333;
+}
+.color_pick.color_big em{
+	width:80px;
+	height:38px;
+	*margin-bottom:3px;
+	text-align:center;
+}
+/*字体颜色选择组合*/
+.color_pick_dom{
+	width:70px;
+	width:300px;
+}
+.color_pick_dom ul{
+	height:29px;
+	width:170px;
+	padding:3px 0 0 0;
+}
+.color_pick_dom li{
+	float:left;
+	margin-right:10px;
+	_margin-right:8px;
+	white-space:nowrap;
+}
+.color_pick_dom li input{
+	_margin:0 0 -1px -3px;
+	_padding:0;
+}
+.color_pick_dom li.none{
+	margin-right:0;
+}
+.color_pick_dom .color_pick{
+	background-position:151px center;
+}
+.color_pick_dom .color_pick em{
+	width:145px;
+}
+.color_pick_dom .case{
+	float:right;
+	width:100px;
+	border:1px solid #ccc;
+	background:#fff;
+	padding:10px 10px;
+}
+
+
+/*
+===================
+三列列表
+===================
+*/
+.three_list{
+	width:360px;
+}
+.three_list li{
+	float:left;
+	width:33%;
+	height:25px;
+	line-height:25px;
+	overflow:hidden;
+}
+
+/*
+===================
+管理样式
+===================
+*/
+.design_layout_edit{
+	display:none;
+	float:right;
+	z-index:999;
+}
+.design_layout_edit a{
+	background:#ff0000;
+	display:block;
+	color:#fff;
+	font-size:12px;
+	font-weight:700;
+	position:absolute;
+	width:60px;
+	margin-left:-60px;
+	text-align:center;
+	height:24px;
+	line-height:24px;
+}
+.mod_box{
+	padding:0 0 5px;
+	/*background:#f7fbff;*/
+	outline:1px dashed #6ea4cc;
+	_border:1px dashed #6ea4cc;
+}
+.J_module_edit{
+	position:absolute;
+	line-height:24px;
+	height:24px;
+	padding:0 10px;
+	background:#336699;
+	color:#fff;
+	z-index:999;
+}
+a.J_module_edit{
+	font-size:12px;
+	color:#fff;
+}
+
+/*
+===================
+空布局默认效果
+===================
+*/
+.tempplace{
+	width:100%;
+	min-height:20px;
+	_height:20px;
+	background:#fcfcfc;
+	border:1px dashed #6ea4cc;
+	_border:1px dashed #6ea4cc;
+	padding:10px 2px;
+	margin-left:-3px;
+	margin-bottom:10px;
+}
+.tempplacein{
+	background:#fff;
+	outline:1px dashed #6ea4cc;
+	_border:1px dashed #6ea4cc;
+}
+.insert_holder{
+	min-height:20px;
+	_height:20px;
+	outline:5px solid #ffd284;
+	_border:1px dashed #6ea4cc;
+}
+
+
+*/
+.header_wrap{
+	position:static !important;
+}
+.wrap{
+	padding-top:161px !important;
+}
+.custom_wrap{
+	padding:190px 0 40px !important;
+}
+.top_design_wrap{
+	height:160px;
+	background:#f4f4f4;
+	position:fixed;
+	width:100%;
+	top:0;
+	left:0;
+	border-bottom:1px solid #ccc;
+	box-shadow:0 2px 5px rgba(0,0,0,0.3);
+	z-index:9998;
+}
+.top_design .hd{
+	background:#2e3337;
+	height:35px;
+	border-bottom:1px solid #fff;
+	padding:0 0 0 10px;
+}
+/*名称*/
+.top_design .hd h2{
+	float:left;
+	font-size:14px;
+	color:#fff;
+	line-height:35px;
+	margin-right:10px;
+}
+/*切换*/
+.top_design .hd ul{
+	float:left;
+	padding-top:5px;
+}
+.top_design .hd li{
+	float:left;
+	line-height:30px;
+	margin-right:10px;
+}
+.top_design .hd li a{
+	float:left;
+	display:block;
+	font-size:14px;
+	font-weight:700;
+	color:#dedede;
+	background:#585c5f;
+	padding:0 15px;
+	border-radius:3px 3px 0 0;
+}
+.top_design .hd li.current a{
+	background:#f4f4f4;
+	color:#6c6f79;
+	border:1px solid #fff;
+	border-bottom:0 none;
+}
+/*右侧操作*/
+.top_design .hd .operate{
+	float:right;
+	padding-top:5px;
+}
+.top_design .hd .operate .btn{
+	width:60px;
+	float:right;
+	margin-right:10px;
+}
+.top_design .hd .operate a{
+	background:#585c5f;
+	color:#dedede;
+	border-radius:3px;
+	line-height:25px;
+	padding:0 10px;
+	float:right;
+	margin-right:10px;
+}
+.top_design .hd .operate .arrow{
+	padding:0 5px 0 3px;
+}
+.top_design .hd .operate .arrow em{
+	border-top:4px #dedede solid;
+}
+/*结构样例*/
+.top_design .layout_sample{
+	height:100px;
+	padding-top:10px;
+}
+.top_design .layout_sample li{
+	float:left;
+	width:100px;
+	height:100px;
+	margin-left:10px;
+	display:inline;
+}
+.top_design .layout_sample li a{
+	display:block;
+	width:98px;
+	height:98px;
+	border:1px solid #e5e5e5;
+	background:#fff;
+	position:relative;
+	color:#565656;
+}
+.top_design .layout_sample li a:hover{
+	text-decoration:none;
+	border-color:#50b2e7;
+	outline:1px solid #50b2e7;
+}
+.top_design .layout_sample li em{
+	line-height:28px;
+	text-align:center;
+	display:block;
+	padding-top:70px;
+	cursor:move;
+}
+/*结构效果*/
+.top_design .layout_sample a span{
+	position:absolute;
+	background:#a4abb2;
+	height:60px;
+	top:8px;
+	cursor:move;
+}
+.top_design .layout_sample .span_1{
+	width:82px;
+	left:8px;
+}
+.top_design .layout_sample .span_2{
+	width:39px;
+	left:8px;
+}
+.top_design .layout_sample .span_3{
+	width:39px;
+	right:8px;
+}
+.top_design .layout_sample .span_4{
+	width:26px;
+	left:8px;
+}
+.top_design .layout_sample .span_5{
+	width:52px;
+	right:8px;
+}
+.top_design .layout_sample .span_6{
+	width:52px;
+	left:8px;
+}
+.top_design .layout_sample .span_7{
+	width:26px;
+	right:8px;
+}
+.top_design .layout_sample .span_8{
+	width:20px;
+	left:8px;
+}
+.top_design .layout_sample .span_9{
+	width:58px;
+	right:8px;
+}
+.top_design .layout_sample .span_10{
+	width:58px;
+	left:8px;
+}
+.top_design .layout_sample .span_11{
+	width:20px;
+	right:8px;
+}
+.top_design .layout_sample .span_12{
+	width:22px;
+	right:38px;
+}
+/*tab结构效果*/
+.top_design .layout_sample .span_13{
+	left:8px;
+	width:26px;
+	height:20px;
+}
+.top_design .layout_sample .span_14{
+	right:36px;
+	width:24px;
+	height:16px;
+}
+.top_design .layout_sample .span_15{
+	right:8px;
+	width:24px;
+	height:16px;
+}
+.top_design .layout_sample .span_16{
+	top:28px;
+	width:82px;
+	height:40px;
+	left:8px;
+}
+.top_design .layout_sample .span_17{
+	width:17px;
+	left:8px;
+}
+.top_design .layout_sample .span_18{
+	width:17px;
+	left:30px;
+}
+.top_design .layout_sample .span_19{
+	width:17px;
+	left:51px;
+}
+.top_design .layout_sample .span_20{
+	width:17px;
+	right:8px;
+}
+/*模块类型切换*/
+.top_design .tab_type{
+	margin:10px;
+	border-bottom:1px solid #dedede;
+}
+.top_design .tab_type li{
+	float:left;
+	padding-bottom:8px;
+}
+.top_design .tab_type li.line{
+	padding:0 10px;
+	color:#dedede;
+}
+.top_design .tab_type li.current a{
+	font-weight:700;
+	color:#333;
+}
+/*模块类型内容*/
+.top_design .tab_type_ct{
+	padding:0 0 10px 10px;
+}
+.top_design .tab_type_ct li{
+	float:left;
+	margin-right:5px;
+}
+.top_design .tab_type_ct li a{
+	float:left;
+	line-height:28px;
+	border:1px solid #d7d7d7;
+	padding:0 10px;
+	background:#fff;
+	color:#333;
+}
+.top_design .tab_type_ct li a:hover{
+	text-decoration:none;
+	border-color:#50b2e7;
+	outline:1px solid #50b2e7;
+}
+.design_box {
+	width:100%;
+	height:100px;
+	border:1px solid #ff0000;
+	background-color:#ccffff;
+}
+
+/*下拉菜单*/
+.core_menu .core_down{
+	background:#fff;
+	border:1px solid #ccc;
+	border-bottom:0 none;
+	width:10px;
+	height:27px;
+	position:absolute;
+	right:-1px;
+	top:-30px;
+	padding:2px 5px 0 3px;
+}
+.core_menu .core_down em{
+	border-top:4px #bfbfbf solid;
+}
+
+/*new edit*/
+.design_layout_style{
+	margin:5px 0;
+	padding:5px 0;
+}
+
+.pop_cont .input, .pop_cont textarea, .pop_cont select {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 2px 2px 2px #F0F0F0 inset;
+    color: #333333;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 18px;
+    margin: 0;
+    padding: 4px;
+    vertical-align: middle;
+}

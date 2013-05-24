@@ -1,0 +1,250 @@
+#*/
+html{
+	overflow-y:scroll;
+}
+body{
+	color:#7d7d7d;
+	font:12px/1.5 Arial;
+	background:#fff;
+}
+a{color:#535353; outline:none; text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+
+
+
+/*===================结构开始===================*/
+
+/*
+===================
+全局下拉菜单
+===================
+*/
+.core_menu{
+	position:absolute;
+	border:1px solid #c1c1c1;
+	background:#fff;
+	width:98px;
+	box-shadow: 0 2px 3px #e4e4e4;
+	outline:none;
+}
+/*上箭头*/
+.core_arrow_top{
+	position:absolute;
+	top:-24px;
+	left:10px;
+	width:40px;
+	height:15px;
+	margin-top:10px;
+	padding:0 25px;
+}
+.core_arrow_top span,
+.core_arrow_top em{
+	position:absolute;
+	width:0;
+	height:0;
+	padding:0;
+	margin:-1px 0 0 2px;
+	border-top:8px transparent dashed;
+	border-right:8px transparent dashed;
+	border-left:8px transparent dashed;
+	overflow:hidden;
+}
+.core_arrow_top span{
+	border-bottom:8px #ffffff solid;
+}
+.core_arrow_top em{
+	border-bottom:8px #c1c1c1 solid;
+	margin-top:-2px;
+}
+/*下箭头*/
+.core_arrow_bottom{
+	position:absolute;
+	bottom:9px;
+	left:10px;
+	padding:0 25px;
+}
+.core_arrow_bottom span,
+.core_arrow_bottom em{
+	position:absolute;
+	width:0;
+	height:0;
+	padding:0;
+	margin:9px 0 0 2px;
+	border-bottom:8px transparent dashed;
+	border-right:8px transparent dashed;
+	border-left:8px transparent dashed;
+	overflow:hidden;
+}
+.core_arrow_bottom span{
+	border-top:8px #ffffff solid;
+}
+.core_arrow_bottom em{
+	border-top:8px #c1c1c1 solid;
+	margin-top:10px;
+}
+/*下拉列表*/
+.core_menu_list{
+	padding:5px 0 !important;
+	height:auto !important;
+	float:none !important;
+}
+.core_menu_list li{
+	float:none !important;
+	padding:1px 0;
+	margin:0;
+	width:100% !important;
+}
+.core_menu_list li a{
+	display:block;
+	line-height:23px;
+	height:23px;
+	text-indent:10px;
+	padding:0 !important;
+	color:#333;
+	border:0 none;
+	margin:0 !important;
+	float:none !important;
+	border-radius: 0;
+	font-size:12px !important;
+}
+.core_menu_list li a:hover{
+	border:0 none;
+	background:#f5f5f5;
+	text-decoration:none;
+	color:#333;
+}
+.core_menu_list .data{
+	background:#f6f6f6;
+	float:right;
+	width:23px;
+	text-align:center;
+	padding:0;
+	border-radius:2px;
+	line-height:16px;
+	height:16px;
+	text-indent:0;
+	margin:2px 2px 0 0;
+}
+.core_menu_list li a:hover .data{
+	background:#fff;
+}
+.core_menu_list .hr{
+	height:0;
+	border-bottom:1px solid #e8e8e8;
+	margin:3px auto;
+	overflow:hidden;
+	font:0/0 Arial;
+}
+/*
+===================
+全局下三角
+===================
+*/
+.core_arrow{
+	display:inline-block;
+	vertical-align:-2px;
+	width:0;
+	height:0;
+	padding:0;
+	margin:0 0 0 2px;
+	border-top:4px #a9c7dd solid;
+	border-bottom:4px transparent dashed;
+	border-right:4px transparent dashed;
+	border-left:4px transparent dashed;
+	overflow:hidden;
+}
+/*
+===================
+全局数字提示效果
+>>必须用em或者span来做标签
+>>例：头部消息后面的数字
+===================
+*/
+.core_num{
+	padding:0 4px;
+	background:#ff9000;
+	color:#fff !important;
+	border-radius:3px;
+	font-size:12px;
+	overflow:hidden;
+	text-indent:0;
+}
+
+/*
+===================
+全局载入更多
+===================
+*/
+.more_loading a{
+	background:#f4f4f4;
+	border:1px solid #eaeaea;
+	text-align:center;
+	line-height:18px;
+	height:18px;
+	display:block;
+	padding:5px 0;
+	_padding:8px 0 2px;
+}
+.more_loading a:hover{
+	text-decoration:none;
+	background:#f1f1f1;
+	border-color:#eaeaea;
+}
+
+/*
+===================
+文本颜色
+===================
+*/
+.s1{
+	color:#ff3333;
+}
+.s2{
+	color:#f26c4f;
+}
+.s3{
+	color:#008800;
+}
+.s4{
+	color:#105cb6;
+}
+.s5{
+	color:#333333;
+}
+.s6{
+	color:#666666;
+}
+.gray{
+	color:#999999;
+}
+
+/*
+===================
+登陆保护和弹出登录
+===================
+*/
+.pop_login{
+	width:400px;
+}
+
+/*
+===================
+发消息弹窗宽度
+===================
+*/
+.pop_message_add{
+	width:530px;
+}
+
+/*
+===================
+举报弹窗
+===================
+*/
+.pop_report{
+	width:392px;
+	padding-top:10px;
+}
+
+

@@ -1,0 +1,111 @@
+/*
+===================
+@explain: 系统后台登陆页面
+@copyright: Copyright 2012,phpwind.com
+@author: longwenid@gmail.com
+$Id: admin_login.css 12795 2012-06-26 09:49:36Z yanchixia $
+===================
+*/
+html{
+	padding:0;
+	margin:0;
+}
+body {
+	background: url(../images/admin/login/bg.jpg);
+	padding:0;
+	margin:0;
+	font-family:Arial, "Microsoft Yahei";
+}
+
+.wrap {
+	width: 250px;
+	overflow:hidden;
+	margin: 180px auto 0;
+	-webkit-animation: bounce 600ms linear;
+}
+
+h1 a {
+	display: block;
+	height: 55px;
+	width: 385px;
+	margin:auto;
+	overflow: hidden;
+	text-indent: -2000em;
+	background: url(../images/admin/login/logo.png) no-repeat;
+}
+
+.login ul,
+.login li{
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+.login ul{
+	background:#fff;
+	border:1px solid #2d2e30;
+	box-shadow:3px 3px 3px #ccc inset;
+	border-radius:5px;
+	overflow:hidden;
+	margin-bottom:15px;
+}
+.login li{
+	border-top:1px solid #d3d4d4;
+	padding:5px;
+}
+.login li img{
+	vertical-align:top;
+}
+.login .input {
+	width: 225px;
+	padding: 5px;
+	vertical-align: middle;
+	border:0 none;
+	background:transparent;
+	font-size:18px;
+	font-family:Arial,"Microsoft Yahei";
+}
+.login .input:focus {
+	outline:0 none;
+}
+.btn {
+	width: 250px;
+	height: 40px;
+	border: 0 none;
+	padding: 0;
+	margin: 0;
+	vertical-align: middle;
+	background:url(../images/admin/login/btn.png) no-repeat;
+	overflow:visible;
+	color:#fff;
+	font-size:20px;
+	cursor:pointer;
+	font-family:Arial, "Microsoft Yahei";
+}
+.btn:hover{
+	background-position:0 -40px;
+}
+.btn:active {
+	background-position:0 -80px;
+}
+
+/*登陆框动画*/
+@-webkit-keyframes bounce {
+  0% {
+  	-webkit-transform: scale3d(0.1,0.1,1);
+  }
+  30% {
+  	-webkit-transform: scale3d(0.5,0.5,1);
+  }
+  55% {
+  	-webkit-transform: scale3d(1.08,1.08,1);
+  }
+  65% {
+  	-webkit-transform: scale3d(1,1,1);
+  }
+  75% {
+  	-webkit-transform: scale3d(0.95,0.95,1);
+  }
+  100% {
+  	-webkit-transform: scale3d(1,1,1);
+  }
+}

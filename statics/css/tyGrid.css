@@ -1,0 +1,48 @@
+﻿.table-list{
+	border:none;
+
+}
+.table-list thead th{
+	background-color: #DCF0FF;
+    border: 1px solid #DDDDDD;
+    height: 40px;
+    overflow: hidden;
+    padding: 3px 0;
+	color: #706E6E;
+    font-size: 12px;
+    font-weight: normal;
+    text-overflow: ellipsis;
+	border-color:none;
+	text-align:center;
+	padding-left:0;
+}
+.table-list tbody td{ 
+	border-bottom: 1px solid #DDDDDD;
+    border-left: 1px solid #DDDDDD;
+	border-right: 1px solid #DDDDDD;
+	color: #706E6E;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0 14px 0 0;
+	height: 40px;
+    padding: 0 5px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+	border-color:none;
+}
+.explain-col{
+	background: none repeat scroll 0 0 #F7F7F7;
+    border: 1px solid #D0D0D0;
+    border-radius: 5px 5px 5px 5px;
+    clear: both;
+    margin: 5px 0 ;
+    padding: 10px 20px;
+    width: 96%;
+	position: relative;
+    z-index: 1;
+}
+.col-2 h6{
+	background-image:none;
+	background-color: #DCF0FF;
+}
+
