@@ -53,6 +53,14 @@ class Free {
 		//产品版本
 		$app_config = self::loadConfig('application',APP);
 		!defined('PLATFORM_VERSION') && define('PLATFORM_VERSION' , isset($app_config['version'])  ? $app_config['version']  : 'base');
+		
+		//js 路径
+		define('JS_PATH', $app_config['js_path']);
+		//css 路径
+		define('CSS_PATH', $app_config['css_path']);
+		//img 路径
+        define('IMG_PATH', $app_config['img_path']);
+		
 		self::loadSysClass('FreeApplication')->run();
 	}
 	

@@ -24,14 +24,14 @@ final class FreeApplication extends FreeBase {
 		$this->_action = $param->route_a();
 		//$this->init($this->_module,$this->_controller,$this->_action);
 	}
-	
-	public function __destruct()
+		public function __destruct()
 	{
 		if(FREE_DEBUG)
 		{
 			echo FreeDebug::debug();
 		}
 	}
+
 	
 	/**
 	 * 调用件事

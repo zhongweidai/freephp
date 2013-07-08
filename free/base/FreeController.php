@@ -26,9 +26,7 @@ class FreeController extends FreeBase{
 		Free::loadSysClass('FreeApplication')->setController($this);
 	}
 	
-	public function __destruct()
-	{
-	}
+
 	/**
 	*模板变量分配
      +----------------------------------------------------------

@@ -53,19 +53,10 @@ class FreeInit extends FreeBase{
      * @return void
      +----------------------------------------------------------
      */
-	private function resourceInit()
+	public static function resourceInit()
 	{
 		//定义网站根路径
 		define('WEB_PATH',Free::loadConfig('system','web_path'));
-		//js 路径
-		define('JS_PATH',Free::loadConfig('system','js_path'));
-		//css 路径
-		define('CSS_PATH',Free::loadConfig('system','css_path'));
-		//img 路径
-        define('IMG_PATH',Free::loadConfig('system','img_path'));
-		define('WAP_UCD_PATH',Free::loadConfig('system','wap_ucd_path'));
-		//wap UCD 路径
-		define('CSS_PATH',Free::loadConfig('system','css_path'));
 		//图片上传路径
 		define('UPLOAD_PATH',Free::loadConfig('system','upload_url'));
 		define('UPLOAD_PATH_',Free::loadConfig('system','upload_path'));

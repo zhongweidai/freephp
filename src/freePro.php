@@ -16,7 +16,6 @@ class FreePro {
 	    Free::loadFunc('global',FREE_PATH . 'src' . DIRECTORY_SEPARATOR . 'func' . DIRECTORY_SEPARATOR);
 		Free::loadClass('FreeProFrontController',FREE_PATH . 'src/library',0);
 		Free::loadClass($app . 'FrontController',FREE_PATH . 'src/library',0);
-		Free::loadClass($app . 'FrontController',FREE_PATH . 'src/library',0);
 		Free::loadClass('FreeProServer',FREE_PATH . 'src/library',0);
 	}
 	
