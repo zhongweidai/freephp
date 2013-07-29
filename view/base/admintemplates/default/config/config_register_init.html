@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>{template "admin","header"}
+</head>
+<body>
+<div class="wrap">
+  <div class="nav">
+    <ul class="cc">
+      <li><a href="{U('config/index/init',array('ns'=>'site'))}">站点信息</a></li>
+      <li  class="current"><a href="{U('config/index/init',array('ns'=>'register'))}">用户注册</a></li>
+      <li><a href="{U('config/index/init',array('ns'=>'login'))}">用户登录</a></li>
+      <li><a href="{U('config/index/init',array('ns'=>'attachment'))}">附件设置</a></li>
+    </ul>
+  </div>
+  <div class="h_a">注册设置</div>
+  <form method="POST" class="J_ajaxForm" action="{U('config/index/edit',array('ns'=>'register'))}" data-role="list">
+    <div class="table_full">
+      <table width="100%">
+        <col class="th" />
+        <col width="400" />
+        <col />
+        <tr>
+          <th>允许新用户注册</th>
+          <td><ul class="single_list cc" id="J_register_type">
+              <li>
+                <label>
+                <input type="radio" name="REGISTER_TYPE" data-type="reg2" value="1"{if $config['REGISTER_TYPE'] == 1} checked{/if} />
+                开放注册</label>
+              </li>
+              <li>
+                <label>
+                <input type="radio" name="REGISTER_TYPE" data-type="reg3" value="0"{if $config['REGISTER_TYPE'] == 0} checked{/if} />
+                关闭注册</label>
+              </li>
+            </ul></td>
+          <td><div class="fun_tips"></div></td>
+        </tr>
+      </table>
+    </div>
+    <div class="h_a">基本设置</div>
+    <div class="table_full">
+      <table width="100%" class="J_reg_tbody" id="reg2" style="margin-bottom:0;">
+        <col class="th" />
+        <col width="400" />
+        <col />
+        <tbody>
+          <tr>
+            <th>注册协议内容</th>
+            <td><textarea class="length_5" name="REGISTER_PROTOCOL">{$config['REGISTER_PROTOCOL']}</textarea>
+            </td>
+            <td><div class="fun_tips">注册许可协议的内容。支持html代码。</div></td>
+          </tr>
+          <tr>
+            <th>同一IP重复注册[小时]</th>
+            <td><input type="number" class="input length_5 mr5" name="REGISTER_SECURITY_IP" value="{$config['REGISTER_SECURITY_IP']}" />
+              小时 </td>
+            <td><div class="fun_tips">规定时间内，同一IP将无法进行多次注册。0或留空表示不限制。</div></td>
+          </tr>
+          <tr>
+            <th>禁用用户名</th>
+            <td><textarea class="length_5" name="REGISTER_BAN_USERNAME">{$config['REGISTER_BAN_USERNAME']}</textarea>
+            </td>
+            <td><div class="fun_tips">包含设定词汇的所有用户名将无法成功注册。如你禁用了"版主"，那么所有含有"版主"(如:我是版主)的用户名将被禁止使用。多个词之间用英文半角逗号","分隔。</div></td>
+          </tr>
+          <tr>
+            <th>用户名长度控制</th>
+            <td><input type="number" class="input select_2 mr15" value="{$config['REGISTER_MIN_USERNAME']}" name="REGISTER_MIN_USERNAME">
+              <span class="mr15">到</span>
+              <input type="number" class="input select_2" value="{$config['REGISTER_MAX_USERNAME']}" name="REGISTER_MAX_USERNAME">
+            </td>
+            <td><div class="fun_tips">用户名字符的最小和最大长度，最小值不能小于1，最大值不能大于15。</div></td>
+          </tr>
+          <tr>
+            <th>密码长度控制</th>
+            <td><input type="number" class="input select_2 mr15" value="{$config['REGISTER_MIN_PASSWORD']}" name="REGISTER_MIN_PASSWORD">
+              <span class="mr15">到</span>
+              <input type="number" class="input select_2" value="{$config['REGISTER_MAX_PASSWORD']}" name="REGISTER_MAX_PASSWORD">
+            </td>
+            <td><div class="fun_tips">最小值不能小于1，无最大值限制，留空表示不限制。</div></td>
+          </tr>
+          <tr>
+            <th>强制密码复杂度</th>
+            <td><ul class="three_list cc">
+                <li>
+                  <label>
+                  <input type="checkbox" value="1" name="REGISTER_SECURITY_PASSWORD[]"{if in_array(1, $config['REGISTER_SECURITY_PASSWORD'])} checked{/if} />
+                  小写字母</label>
+                </li>
+                <li>
+                  <label>
+                  <input type="checkbox" value="2" name="REGISTER_SECURITY_PASSWORD[]"{if in_array(2, $config['REGISTER_SECURITY_PASSWORD'])} checked{/if} />
+                  大写字母</label>
+                </li>
+                <li>
+                  <label>
+                  <input type="checkbox" value="4" name="REGISTER_SECURITY_PASSWORD[]"{if in_array(4, $config['REGISTER_SECURITY_PASSWORD'])} checked{/if} />
+                  数字</label>
+                </li>
+                <li>
+                  <label>
+                  <input type="checkbox" value="8" name="REGISTER_SECURITY_PASSWORD[]"{if in_array(8, $config['REGISTER_SECURITY_PASSWORD'])} checked{/if} />
+                  符号</label>
+                </li>
+                <li style="width:66%;">
+                  <label>
+                  <input type="checkbox" value="9" name="REGISTER_SECURITY_PASSWORD[]"{if in_array(9, $config['REGISTER_SECURITY_PASSWORD'])} checked{/if} />
+                  密码不能与用户名相同</label>
+                </li>
+              </ul></td>
+            <td><div class="fun_tips">密码中必须符合所选条件限制。</div></td>
+          </tr>
+          <tr>
+            <th>是否开启图形验证码</th>
+            <td><ul class="switch_list cc">
+                <li>
+                  <label>
+                  <input type="radio" name="REGISTER_VERIFY" value="1"{if $config['REGISTER_VERIFY']==1} checked{/if} />
+                  <span>开启</span></label>
+                </li>
+                <li>
+                  <label>
+                  <input type="radio" name="REGISTER_VERIFY" value="0"{if $config['REGISTER_VERIFY']==0} checked{/if} />
+                  <span>关闭</span></label>
+                </li>
+              </ul></td>
+            <td><div class="fun_tips">选择“开启”，则用户在注册时是否开启验证码。</div></td>
+          </tr>
+          <tr>
+            <th>新用户注册手机认证</th>
+            <td><ul class="switch_list cc">
+                <li>
+                  <label>
+                  <input type="radio" name="REGISTER_ACTIVE_PHONE" value="1"{if $config['REGISTER_ACTIVE_PHONE']==1} checked{/if} />
+                  <span>开启</span></label>
+                </li>
+                <li>
+                  <label>
+                  <input type="radio" name="REGISTER_ACTIVE_PHONE" value="0"{if $config['REGISTER_ACTIVE_PHONE']==0} checked{/if} />
+                  <span>关闭</span></label>
+                </li>
+              </ul></td>
+            <td><div class="fun_tips">选择“开启”，则用户在注册时即需要验证绑定，请先进行实名认证设置。</div></td>
+          </tr>
+          <tr>
+            <th>注册界面显示用户字段</th>
+            <td><ul class="three_list cc">
+                <li>
+                  <label>
+                  <input type="checkbox" value="email" name="REGISTER_ACTIVE_FIELD[]"{if in_array('email',$config['REGISTER_ACTIVE_FIELD'])} checked{/if} />
+                  邮箱</label>
+                </li>
+                <li>
+                  <label>
+                  <input type="checkbox" value="mobile" name="REGISTER_ACTIVE_FIELD[]"{if in_array('mobile',$config['REGISTER_ACTIVE_FIELD'])} checked{/if} />
+                  手机</label>
+                </li>
+                <li>
+                  <label>
+                  <input type="checkbox" value="location" name="REGISTER_ACTIVE_FIELD[]"{if in_array('location',$config['REGISTER_ACTIVE_FIELD'])} checked{/if} />
+                  现居住地</label>
+                </li>
+                <li>
+                  <label>
+                  <input type="checkbox" value="hometown" name="REGISTER_ACTIVE_FIELD[]"{if in_array('hometown',$config['REGISTER_ACTIVE_FIELD'])} checked{/if} />
+                  家乡</label>
+                </li>
+                <li>
+                  <label>
+                  <input type="checkbox" value="qq" name="REGISTER_ACTIVE_FIELD[]"{if in_array('qq',$config['REGISTER_ACTIVE_FIELD'])} checked{/if} />
+                  QQ</label>
+                </li>
+                <li>
+                  <label>
+                  <input type="checkbox" value="msn" name="REGISTER_ACTIVE_FIELD[]"{if in_array('msn',$config['REGISTER_ACTIVE_FIELD'])} checked{/if} />
+                  MSN</label>
+                </li>
+              </ul></td>
+            <td><div class="fun_tips">选择需要显示在注册界面的用户字段，勾选表示显示并限制必填。</div></td>
+          </tr>
+        </tbody>
+      </table>
+      <table width="100%" class="J_reg_tbody" id="reg3" style="margin-bottom:0;">
+        <col class="th" />
+        <col width="400" />
+        <col />
+        <!--关闭注册内容-->
+        <tbody>
+          <tr>
+            <th>关闭注册原因</th>
+            <td><textarea class="length_5" name="REGISTER_CLOSE_MSG">{$config['REGISTER_CLOSE_MSG']}</textarea>
+            </td>
+            <td><div class="fun_tips">当站点关闭注册时，对外的提示信息。<br>
+                支持html代码。</div></td>
+          </tr>
+        </tbody>
+        <!--结束-->
+      </table>
+    </div>
+    <div class="btn_wrap">
+      <div class="btn_wrap_pd">
+        <button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+      </div>
+    </div>
+  </form>
+</div>
+{template "admin","footer"}
+<script>
+
+$(function(){
+	//是否允许新用户注册
+	registAreaShow($('#J_register_type input:checked').data('type'));
+
+	$('#J_register_type input:radio').on('change', function(){
+			registAreaShow($(this).data('type'));
+	});
+
+	function registAreaShow(type) {
+		var reg_arr= new Array();
+		reg_arr = type.split(",");
+		$('.J_reg_tbody').hide();
+		$.each(reg_arr, function(i, o){
+			$('#'+ o).show();
+		});
+	}
+});
+</script>
+</body>
+</html>

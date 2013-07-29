@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>{template "admin","header"}
+</head>
+<body style="width:450px;">
+<div class="warp">
+  <!--用户权限编辑添加: 用户编辑弹窗-->
+  <form id="J_auth_form" action="{U('config/workflow/edit')}" method="post" class="J_ajaxForm"  data-role="edit">
+  <input  type="hidden" name="uid" value="{$uid}" />
+    <div style="width:450px;background:#fff;">
+      <div class="pop_cont pop_table">
+        <div class="mb15">
+          <table width="100%" style="table-layout:fixed;">
+            <col width="90" />
+            <col />
+            <tr>
+              <th>工作流名称</th>
+              <td><span class="must_red">*</span>
+                <input name="info[NAME]" value="{$infos['NAME']}" type="text" class="input input_hd"></br> 
+                <span style="color:#959595">工作流名称作为展示名</span>
+              </td>
+            </tr>
+            <tr>
+			<th>描述</th>
+			<td>
+				<textarea name="info[DESCRIPTION]" maxlength="255" style="width:315px;height:60px;">{$infos['DESCRIPTION']}</textarea>&nbsp;<span style="color:#959595">可以为空,支持最大字符长度255</span>
+			</td>
+			</tr>
+			
+            <tr>
+    		<th>审核级数</th>
+    		<td style="padding-left:10px">
+				<select name="info[STEPS]" onchange="select_steps(this.value)">
+				{loop $steps $k $type}
+				  <option value="{$k}" {if $k==$infos[STEPS]} selected="selected"{/if}>{$type}</option>
+				  {/loop}					
+				</select>
+			</td>
+  			</tr>
+  			
+   			<tr id="step1">
+    		<th>一级审核人员列表</th>
+    		<td style="padding-left:10px">
+    		{loop $admins $type}
+    		<?php echo strpos($checkadmin1,$type['USERNAME']);?>
+				<input type="checkbox" value="{$type['USERNAME']}" name="checkadmin1[]" {if in_array($type['USERNAME'],$checkadmin1)}checked{/if}/>{$type['USERNAME']}
+			{/loop}
+			</td>
+  			</tr>
+  			
+   			<tr id="step2" style="display:{if $infos['STEPS']<'2'}none{/if}">
+    		<th>二级审核人员列表</th>
+    		<td style="padding-left:10px">
+    		{loop $admins $type}
+				<input type="checkbox" value="{$type['USERNAME']}" name="checkadmin2[]" {if in_array($type['USERNAME'],$checkadmin2)}checked{/if}/>{$type['USERNAME']}
+			{/loop}	
+			</td>
+ 		 	</tr>
+ 		 	
+   			<tr id="step3" style="display:{if $infos['STEPS']<'3'}none{/if}">
+    		<th>三级审核人员列表</th>
+    		<td style="padding-left:10px">
+    		{loop $admins $type}
+				<input type="checkbox" value="{$type['USERNAME']}" name="checkadmin3[]" {if in_array($type['USERNAME'],$checkadmin3)}checked{/if}/>{$type['USERNAME']}
+			{/loop}	
+			</td>
+  			</tr>
+  			
+   			<tr id="step4" style="display:{if $infos['STEPS']<'4'}none{/if}">
+    		<th>四级审核人员列表</th>
+   		 	<td style="padding-left:10px">
+   		 	{loop $admins $type}
+				<input type="checkbox" value="{$type['USERNAME']}" name="checkadmin4[]" {if in_array($type['USERNAME'],$checkadmin4)}checked{/if}/>{$type['USERNAME']}
+			{/loop}
+			</td>
+  			</tr>
+  			
+  			<tr>
+    		<th>免审核人员</th>
+   		 	<td style="padding-left:10px">
+   		 	{loop $admins $type}
+				<input type="checkbox" value="{$type['USERNAME']}" name="nocheck_users[]" {if in_array($type['USERNAME'],$nocheck_users)}checked{/if}/>{$type['USERNAME']}
+			{/loop}
+			</td>
+  			</tr>
+  			
+          </table>
+        </div>
+
+      </div>
+      <div class="pop_bottom">
+        <button id="J_auth_sub" class="btn btn_submit" type="submit">提交</button>
+        <div id="J_submit_tips"></div>
+      </div>
+    </div>
+  </form>
+  <!--用户编辑弹窗结束-->
+</div>
+{template "admin","footer"}
+<script>
+Wind.js('{JS_PATH}pages/admin/auth_manage.js');
+</script>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function select_steps(stepsid) {
+	for(i=4;i>1;i--) {
+		if(stepsid>=i) {
+			$('#step'+i).css('display','');
+		} else {
+			$('#step'+i).css('display','none');
+		}
+	}
+}
+//-->
+</SCRIPT>
+</body>
+</html>

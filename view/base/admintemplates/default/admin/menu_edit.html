@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+{template "admin","header"}
+<style>
+body{width:440px;}
+</style>
+</head>
+<body class="body_none">
+<div>
+<!-- mod start -->
+<form method="post" class="J_ajaxForm" action="{U('admin/menu/edit',array('id'=>$id))}" data-role="list">
+<div class="pop_cont pop_table">
+	<table width="100%" style="table-layout:fixed;">
+		<col width="80" />
+		<col />
+		<tr>
+			<th>{L('menu_pre')}</th>
+			<td>
+				<span class="must_red">*</span>
+				<select name="info[FATHERID]" class="select_5">
+					<option value=0>{L('menu_first')}</option>
+					{$select_menu}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>{L('menu_name')}</th>
+			<td>
+				<span class="must_red">*</span>
+				<input type="text" name="info[NAME]" class="input input_hd length_5" value="{$menu['NAME']}">
+			</td>
+		</tr>
+		<tr>
+			<th>{L('menu_enname')}</th>
+			<td>
+				<span class="must_red">*</span>
+				<input type="text" name="info[ENGNAME]" class="input input_hd length_5" value="{$menu['ENGNAME']}">
+			</td>
+		</tr>
+		<tr>
+			<th>动作</th>
+			<td>
+				<div class="mb5"><input type="text" name="info[QUERY]" class="input length_5" value="{$menu['QUERY']}"></div>
+				<div class="gray">如：admin/menu/*</div>
+			</td>
+		</tr>
+		<tr>
+			<th>顺序</th>
+			<td>
+				<input type="text" name="info[ORDERNO]" class="input input length_0 mr10" value="{$menu['ORDERNO']}">
+
+			<!--{L('is_menu_log')} <input class="J_bold" type="checkbox" value="1" data-class="b" name="info[IS_LOG]" {if $menu['IS_LOG']}checked{/if}>-->
+			</td>
+		</tr>
+		<tr>
+			<th>说明</th>
+			<td>
+				<div class="mb5">
+					<input class="input length_5" type="text" value="{$menu[REMARK]}" name="info[REMARK]">
+				</div>
+				<div class="gray">鼠标悬浮于链接文字上时的说明内容</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<!-- mod end -->
+<div class="pop_bottom">
+		<button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+		<input name="id" type="hidden" value="{$menu['ID']}">
+</div>
+</form>
+<!-- end -->
+
+</div>
+{template "admin","footer"}
+</body>
+</html>

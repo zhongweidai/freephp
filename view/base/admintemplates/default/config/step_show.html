@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+{template "admin","header"}
+</head>
+<body>
+<div class="wrap">
+<div class="nav">
+	<ul class="cc">
+		<li><a href="{U('config/step/init')}">所有菜单</a></li>
+		<li class="current"><a href="{U('config/step/show',array('name'=>$name))}">当前菜单</a></li>
+	</ul>
+	
+</div>
+<div class="fr">
+		<form class="J_custom_ajaxForm" method="post" action="">
+			<button class="btn btn_submit J_ajax_submit_btn fr" data-url="{U('config/step/cache',array('name'=>$name))}" data-form="J_custom_ajaxForm">刷新缓存</button>
+		</form>
+</div>
+<div class="h_a">当前菜单：{$step['name']} | {$name}</div>
+	<div class="mb10 prompt_text">
+			<li> <form action="{U('config/step/addItem',array('name'=>$name))}" class="J_ajaxForm" method="post"  >上级选项&nbsp;{$select_str}&nbsp;&nbsp;&nbsp;&nbsp;请输入选项名称&nbsp;&nbsp;<input name="item[NAME]" type="text" class="input length_4" value="" />&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">添加</button> </form></li>
+			<li> 如果没选择上级选项则表示增加的是顶级分类，用半角逗号","分开可以一次增加多个分类。 </li>
+	</div>
+
+<form method="post" class="J_ajaxForm" action="{U('config/step/editItem',array('name'=>$name))}" data-role="list">
+
+<div class="table_list">
+	<table width="100%" id="J_table_list" style="table-layout:fixed;">
+		<col width="30">
+		<col width="380">
+		<col width="200">
+		<col width="200">
+		<col width="50">
+		<thead>
+			<tr>
+				<td></td>
+				<td>排序 | 名称</td>
+				<td>值</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		{$tree_step}
+		
+	</table>
+</div>
+<div class="btn_wrap">
+	<div class="btn_wrap_pd">
+		<button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">提交</button>
+	</div>
+</div>	
+</form>
+
+
+</div>
+{template "admin","footer"}
+<script>
+/*
+root_tr_html 为“添加导航”html
+child_tr_html 为“添加二级导航”html
+*/
+var root_tr_html = '<tr>\
+                            <td><span class="zero_icon mr10"></span></td>\
+                                        <td>\
+                                            <input name="newdata[root_][ORDERNO]" type="text" value="" class="input length_0 mr10">\
+											<input name="newdata[root_][NAME]" type="text" class="input length_3 mr5" value="">\
+                                            <input type="hidden" name="newdata[root_][tempid]" value="temp_root_"/>\
+                                        </td>\
+										<td>\
+											<input name="newdata[root_][VALUE]" type="text" class="input length_1" value="">\
+										</td>\
+                                        <td class="tac"><input name="newdata[root_][STATUS]" type="checkbox" checked="checked"></td>\
+                                        <td>\
+                                            <a href="" class="mr5 J_newRow_del">[删除]</a>\
+                                        </td>\
+                                    </tr>';
+Wind.js(GV.JS_ROOT+ 'pages/admin/common/forumTree_table.js?v=' +GV.JS_VERSION);
+</script>
+<script type="text/javascript" src="{JS_PATH}/dev/util_libs/jquery.draggable.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+{template "admin","header"}
+<style>
+body{width:540px;}
+</style>
+</head>
+<body class="body_none">
+<div>
+<!-- mod start -->
+<form method="post" class="J_ajaxForm1" action="{U('admin/site/edit',array('_json'=>1))}" data-role="list" encoding="multipart/form-data" enctype="multipart/form-data">
+<div class="pop_cont pop_table">
+	<table width="100%" style="table-layout:fixed;">
+		<col width="80" />
+		<col />
+		<tr>
+			<th>管理员[ID]</th>
+			<td>
+				{$admin['USERNAME']}[{$admin['USERID']}]
+			</td>
+		</tr>
+		<tr>
+			<th>操作IP</th>
+			<td>
+				{$admin['IP']}
+			</td>
+		</tr>
+		<tr>
+			<th>访问URL</th>
+			<td>
+				{$admin['URL']}
+			</td>
+		</tr>
+		<tr>
+			<td>操作时间</td>
+			<td>
+				{date('Y-m-d H:i:s',$admin['OP_TIME'])}
+			</td>
+		</tr>
+		<!--tr>
+			<th>GET数据</th>
+			<td>
+				{$admin['DATA_GET']}
+			</td>
+		</tr>
+		<tr>
+			<td>POST数据</td>
+			<td>
+				
+			</td>
+		</tr-->
+		<tr>
+			<th>执行sql</th>
+			<td>
+				{loop unserialize($admin['EX_SQL']) $s}
+				{htmlspecialchars($s)}</br>
+				{/loop}
+			</td>
+		</tr>
+	</table>
+</div>
+			
+		
+<!-- mod end -->
+<div class="pop_bottom">
+		<button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+		<input name="id" type="hidden" value="{$site['ID']}">
+</div>
+</form>
+<!-- end -->
+
+</div>
+{template "admin","footer"}
+</body>
+</html>

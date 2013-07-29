@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>{template "admin","header"}
+</head>
+<body>
+<div class="wrap J_check_wrap">
+	<div class="nav">
+		<ul class="cc">
+			<li><a href="{U('config/index/init',array('ns'=>'site'))}">站点信息</a></li>
+			<li><a href="{U('config/index/init',array('ns'=>'register'))}">用户注册</a></li>
+			<li><a href="{U('config/index/init',array('ns'=>'login'))}">用户登录</a></li>
+			<li><a href="{U('config/index/init',array('ns'=>'attachment'))}">附件设置</a></li>、
+			<li  class="current"><a href="{U('config/workflow/init')}">工作流</a></li>
+		</ul>
+	</div>
+	<div class="cc mb10">
+		<a class="btn J_dialog" title="添加工作流" href="{U('config/workflow/add')}">
+			<span class="add"></span>
+			添加工作流
+		</a>
+	</div>
+  <form method="post" action="{U('config/workflow/delAll')}" data-role="list" class="J_ajaxForm">
+	<div class="table_list">
+		<table width="100%">
+			<thead>
+				<tr>
+					<td width="50"><input type="checkbox" data-checklist="J_check_y" data-direction="y" class="J_check_all" name="checkAll">全选</td>
+					<td width="21%">工作流名称</td>
+					<td>审核级数</td>
+					<td>流程示意图</td>
+					<td>描述</td>
+					<!--td width="15%">评论模块</td-->
+					<td width="14%">管理操作</td>
+				</tr>
+			</thead>
+		   {loop $config $k $v}
+			<tr>
+				<td><input type="checkbox" value="{$k}" name="uid[]" data-yid="J_check_y" data-xid="J_check_x" class="J_check"/></td>
+				<td>{$v['NAME']}</td>
+				<td>{$steps[$v['STEPS']]}</td>
+				<td><a href="{U('config/workflow/view', array('uid'=>$k))}" title="流程示意图  《{$steps[$v['STEPS']]}》" class="mr10 J_dialog">点击查看</a></td>
+				<td>{$v['DESCRIPTION']}</td>
+				<!--td></td-->
+				<td>
+				 <a href="{U('config/workflow/edit', array('uid'=>$k))}" class="mr10 J_dialog">修改</a>&nbsp;&nbsp;
+				 <a href="{U('config/workflow/del', array('uid'=>$k))}" class="mr10 J_ajax_del">删除</a>
+				</td>
+			</tr>
+		   {/loop}
+		</table>
+	</div>
+	<div class="pages">{$pages}</div>
+	
+	<div class="btn_wrap">
+		<div class="btn_wrap_pd">
+			<label class="mr20"><input type="checkbox" data-checklist="J_check_x" data-direction="x" class="J_check_all" name="checkAll">全选</label>
+			<button class="btn mr10 J_ajax_submit_btn J_ajax_del_all" type="submit" title="批量删除">删除</button>
+		</div>
+	</div>
+	</form>
+</div>
+{template "admin","footer"}
+</body>
+</html>

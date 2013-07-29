@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>{template "admin","header"}
+</head>
+<body>
+<div class="wrap">
+	<div class="nav">
+		<ul class="cc">
+			<li  class="current"><a href="{U('config/step/init')}">联动类别</a></li>
+		</ul>
+	</div>
+	<div class="fr">
+		<form class="J_custom_ajaxForm" method="post" action="">
+			<button class="btn btn_submit J_ajax_submit_btn fr" data-url="{U('config/step/cacheAll')}" data-form="J_custom_ajaxForm">刷新缓存</button>
+		</form>
+	</div>
+	<div class="cc mb10">
+		<a class="btn J_dialog" title="添加联动类别" href="{U('config/step/add')}">
+			<span class="add"></span>
+			添加联动菜单
+		</a>
+	</div>
+  <form method="post" action="{U('config/step/del')}" data-role="list" class="J_ajaxForm">
+	<div class="table_list">
+		<table width="100%">
+			<thead>
+				<tr>
+					<td width="50"><input type="checkbox" data-checklist="J_check_y" data-direction="y" class="J_check_all" name="checkAll">全选</td>
+					<td width="21%">联级菜单名称</td>
+					<td>级数</td>
+					<td>系统</td>
+					<td width="15%">缓存key</td>
+					<td width="14%">管理操作</td>
+				</tr>
+			</thead>
+		   {loop $steps $k $v}
+			<tr data-url="{U('config/step/edit')}" data-id="{$k}">
+				<td><input type="checkbox" value="{$v['ID']}" name="commentid[]" data-yid="J_check_y" data-xid="J_check_x" class="J_check"/></td>
+				<td><span class="J_listTable" data-field="name" data-type="edit" style="cursor: pointer;">{$v['name']}</span></td>
+				<td>{$k}</td>
+				<td>{if $v['is_system']}是{else}否{/if}</td>
+				<td>{$k}</td>
+				<!--td></td-->
+				<td>
+				 <a href="{U('config/step/show', array('name'=>$k))}" class="mr10">查看子分类</a>&nbsp;&nbsp;
+				 <a href="{U('config/step/del', array('name'=>$k))}" class="mr10 J_ajax_del">删除</a>
+				</td>
+			</tr>
+		   {/loop}
+		</table>
+	</div>
+	<div class="pages">{$pages}</div>
+	
+	<div class="btn_wrap">
+		<div class="btn_wrap_pd">
+			<label class="mr20"><input type="checkbox" data-checklist="J_check_x" data-direction="x" class="J_check_all" name="checkAll">全选</label>
+			<button class="btn btn_submit" id="J_del_all" type="button">删除</button>
+		</div>
+	</div>
+	</form>
+</div>
+{template "admin","footer"}
+</body>
+</html>

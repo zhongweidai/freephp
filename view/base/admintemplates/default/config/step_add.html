@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>{template "admin","header"}
+</head>
+<body style="width:460px;">
+<div class="warp">
+  <!--用户权限编辑添加: 用户编辑弹窗-->
+  <form id="J_auth_form" action="{U('config/step/add')}" method="post" class="J_ajaxForm"  data-role="edit">
+      <div class="pop_cont pop_table" style="height:auto;" >
+        <div class="mb15">
+          <table width="100%" style="table-layout:fixed;">
+            <col width="120" />
+            <col />
+            <tr>
+              <th>菜单名称</th>
+              <td><span class="must_red">*</span>
+                <input name="info[NAME]" value="" type="text" class="input input_hd">&nbsp;&nbsp;名称作为展示名
+              </td>
+            </tr>
+            <tr>
+              <th>缓存key</th>
+              <td><span class="must_red">*</span>
+                <input name="info[KEY]" class="input" value="">&nbsp;&nbsp;缓存唯一标示，不能重复
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+		<div class="pop_bottom">
+			<button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+			<input type="hidden" value="42" name="id">
+		</div>
+      
+  </form>
+  <!--用户编辑弹窗结束-->
+</div>
+{template "admin","footer"}
+<script>
+Wind.js('{JS_PATH}pages/admin/auth_manage.js');
+</script>
+</body>
+</html>

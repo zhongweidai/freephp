@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>{template "admin","header"}
+</head>
+<body style="width:450px;">
+<div class="warp">
+
+    <div style="width:450px;background:#fff;">
+      <div class="pop_cont pop_table">
+        <div class="mb15">
+          <table width="100%" style="table-layout:fixed;">
+            <col width="90" />
+            <col />
+            <tr>
+              <th>一级审核</th>
+              <td>
+                {loop $checkadmin1 $v1}
+                	{$v1},
+                {/loop}
+              </td>
+            </tr>
+            
+  			<tr>
+              <th>二级审核</th>
+              <td>
+                {loop $checkadmin2 $v2}
+                	{$v2},
+                {/loop}
+              </td>
+            </tr>
+            <tr>
+              <th>三级审核</th>
+              <td>
+                {loop $checkadmin3 $v3}
+                	{$v3},
+                {/loop}
+              </td>
+            </tr>
+            <tr>
+              <th>四级审核</th>
+              <td>
+                {loop $checkadmin4 $v4}
+                	{$v4},
+                {/loop}
+              </td>
+            </tr>
+  			<tr>
+    		<th>免审核人员</th>
+              <td>
+                {loop $nocheck_users $v}
+                	{$v},
+                {/loop}
+              </td>
+            </tr>
+  			<tr>
+  			
+          </table>
+        </div>
+
+      </div>
+
+</div>
+{template "admin","footer"}
+<script>
+Wind.js('{JS_PATH}pages/admin/auth_manage.js');
+</script>
+</body>
+</html>

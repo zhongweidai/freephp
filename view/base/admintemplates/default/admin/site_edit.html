@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+{template "admin","header"}
+<style>
+body{width:540px;}
+</style>
+</head>
+<body class="body_none">
+<div>
+<!-- mod start -->
+<form method="post" class="J_ajaxForm1" action="{U('admin/site/edit',array('_json'=>1))}" data-role="list" encoding="multipart/form-data" enctype="multipart/form-data">
+<div class="pop_cont pop_table">
+	<table width="100%" style="table-layout:fixed;">
+		<col width="80" />
+		<col />
+		<tr>
+			<th>{L('site_pre')}</th>
+			<td>
+				<span class="must_red">*</span>
+				<select name="info[FATHERID]" class="select_5">
+					<option value=''>{L('site_first')}</option>
+					{loop $sites $r}
+						{if $r['FATHERID'] == 0}
+							<option value="{$r['CODE']}" {if $r['CODE'] == $site['FATHERID']}selected{/if}>{$r['NAME']}</option>
+						{/if}
+					{/loop}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>{L('site_code')}</th>
+			<td>
+				<span class="must_red">*</span>
+				<input type="text" name="info[CODE]" class="input input_hd length_1" value="{$site['CODE']}">
+			</td>
+			<td align="center">{L('site_name')}</td>
+			<td>
+				<span class="must_red">*</span>
+				<input type="text" name="info[NAME]" class="input input_hd length_1" value="{$site['NAME']}">
+			</td>
+		</tr>
+		<tr>
+			<th>顺序</th>
+			<td>
+				<input type="text" name="info[ORDERNO]" class="input input length_1 mr10" value="{$site['ORDERNO']}">
+			</td>
+			<td align="center">{L('status')}</td>
+			<td>
+				  <input class="J_bold" type="checkbox" value="1" data-class="b" name="info[STATUS]" {if $site['STATUS']}checked{/if}>
+			</td>
+		</tr>
+		<tr>
+			<th>{L('site_title')}</th>
+			<td>
+				<div class="mb5"><input type="text" name="info[TITLE]" class="input input_hd length_5" value="{$site['TITLE']}"></div>
+			</td>
+		</tr>
+
+		<tr>
+			<th>SEO</th>
+			<td>
+				<div class="mb5">
+					<input class="input input_hd length_5" type="text" value="{$site['KEY_WORDS']}" name="info[KEY_WORDS]">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th>{L('style_name')}</th>
+			<td>
+				<select size="3" name="info[TEMPLATE]" class="select_5">
+					<option value="default">默认web模板</option>
+					<option value="default">默认web模板</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>{L('wapstyle_name')}</th>
+			<td>
+				<select size="3" name="info[WAPTEMPLATE]" class="select_5">
+					<option value="default">默认wap模板</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>{L('site_image')}</th>
+			<td>
+				<div class="single_image_up">
+					 <a href="">上传图片</a>
+					 <input name="icon" type="file" class="J_upload_preview" data-preview="#j_forum_preview_icon">
+				</div>
+				{if $site['IMAGE']}
+					<img class="J_previewImg" style="max-width: 300px; " src="{$site['IMAGE']}">
+				{/if}
+			</td>
+		</tr>
+		<tr>
+			<th>{L('description')}</th>
+			<td>
+				<textarea class="form_success" name="info[DESCRIPTION]">{$site['DESCRIPTION']}</textarea>
+			</td>
+		</tr>
+	</table>
+</div>
+			
+		
+<!-- mod end -->
+<div class="pop_bottom">
+		<button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+		<input name="id" type="hidden" value="{$site['ID']}">
+</div>
+</form>
+<!-- end -->
+
+</div>
+{template "admin","footer"}
+</body>
+</html>

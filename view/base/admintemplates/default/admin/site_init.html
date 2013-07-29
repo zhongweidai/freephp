@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+{template "admin","header"}
+</head>
+<body>
+<div class="wrap">
+<!--div class="mb10">
+	<a href="{@WindUrlHelper::createUrl('/nav/nav/add')}&type={$navType}" class="btn J_dialog"><span class="add"></span>添加导航</a>
+</div-->
+<div class="nav">
+	<ul class="cc">
+		<li class="current"><a href="{U('admin/site/init')}">{L('site_management')}</a></li>
+	</ul>
+	
+</div>
+<div class="fr">
+		<form class="J_custom_ajaxForm" method="post" action="">
+			<button class="btn btn_submit J_ajax_submit_btn fr" data-url="{U('admin/site/cache')}" data-form="J_custom_ajaxForm">刷新站点缓存</button>
+		</form>
+</div>
+<div class="h_a">提示信息</div>
+	<div class="mb10 prompt_text">
+			<li>站点code是每个站点的唯一标示符，添加修改时不能重复</li>
+	</div>
+
+<form method="post" class="J_ajaxForm" action="{U('admin/site/opera',array('id'=>$id))}" data-role="list">
+
+<div class="table_list">
+	<table width="100%" id="J_table_list" style="table-layout:fixed;">
+		<col width="30">
+		<col width="380">
+		<col width="200">
+		<col width="200">
+		<col width="50">
+		<thead>
+			<tr>
+				<td></td>
+				<td>[{L('sort')}] {L('site_name')}</td>
+				<td>{L('site_title')}</td>
+				<td>{L('site_code')}</td>
+				<td>{L('status')}</td>
+				<td>{L('site_management')}</td>
+			</tr>
+		</thead>
+	<?php
+		foreach ($sites as $value) {
+			$checked=$value['STATUS']?'checked':'';
+			$count=count($value['items']);
+			$icon='zero_icon';
+			if($count>0){
+				$icon='J_start_icon away_icon';
+			}
+	?>
+		<tbody>
+		<tr class="bgA">
+			<td><span class="{$icon}" data-id="{$value['ID']}"></span></td>
+			<td>
+				<input name="data[{$value['ID']}][ID]" type="hidden" value="{$value['ID']}" >
+				<input name="data[{$value['ID']}][ORDERNO]" type="text" class="input length_0 mr10" value="{$value['ORDERNO']}">
+				<input name="data[{$value['ID']}][NAME]" type="text" class="input length_3 mr5" value="{$value['NAME']}">
+				<a style="display:none" href="{U('admin/site/add',array('parentid'=>$value['ID']))}" class="link_add J_addChild add_nav" data-id="{$value['CODE']}" data-html="tbody" data-type="nav_2" data-leve="1" >{L('add_next_site')}</a>
+			</td>
+			<td>
+				<input name="data[{$value['ID']}][TITLE]" type="text" class="input length_3 mr5" value="{$value['TITLE']}">	
+			</td>
+			<td>
+				<input name="data[{$value['ID']}][CODE]" type="text" class="input length_1" value="{$value['CODE']}">
+			</td>
+			<td class="tac"><input name="data[{$value['ID']}][STATUS]" type="checkbox" value="1" {$checked}></td>
+			<td>
+				<a href="{U('admin/site/edit',array('id'=>$value['ID']))}" class="mr10 J_dialog" title="{L('edit')}">[{L('edit')}]</a>
+				<a href="{U('admin/site/delete',array('id'=>$value['ID']))}" class="mr10 J_ajax_del">[{L('delete')}]</a>
+				<?php
+					if($count>0){
+				?>
+				<!--a href="{U('admin/menu/init',array('id'=>$value['ID']))}">[{L('next_menu')}]</a-->
+				<?php }?>
+			</td>
+		</tr>
+		</tbody>
+		<?php
+			if($count>0){
+		?>
+			<tbody id="J_table_list_{$value['ID']}">
+		<?php
+			foreach ($value['items'] as  $childKey=>$childValue) {
+			$checked=$childValue['STATUS']?'checked':'';
+			$endicon=($childKey==$count-1)?'  plus_end_icon':'';
+		?>
+			<tr>
+				<td>&nbsp;</td>
+				<td><span class="plus_icon{$endicon} mr10"></span><input name="data[{$childValue['ID']}][ID]" type="hidden" value="{$childValue['ID']}" ><input name="data[{$childValue['ID']}][ORDERNO]" type="text" class="input length_0 mr10" value="{$childValue['ORDERNO']}" style="width:20px;"><input name="data[{$childValue['ID']}][NAME]" type="text" class="input length_3 mr5" value="{$childValue['NAME']}"><!--<a href="{$addUrl}&type={$navType}&parentid={$value['navid']}" style="display:none" class="s2 dialog">+添加导航</a>--><!--a style="display:none" href="{U('admin/menu/add',array('parentid'=>$value['ID']))}" class="link_add J_addChild add_nav" data-id="{$childValue['ID']}" data-html="tbody" data-type="nav_3" data-leve="2" >添加二级导航</a-->
+					</td>
+				<td>
+					<input name="data[{$childValue['ID']}][TITLE]" type="text" class="input length_3 mr5" value="{$childValue['TITLE']}">
+				</td>
+				<td>
+					<input name="data[{$childValue['ID']}][CODE]" type="text" class="input length_1" value="{$childValue['CODE']}">
+				</td>
+				<td class="tac"><input name="data[{$childValue['ID']}][STATUS]" type="checkbox" value="1" {$checked}></td>
+				<td>
+					<a href="{U('admin/site/edit',array('id'=>$childValue['ID']))}" class="mr10 J_dialog" title="导航编辑">[编辑]</a><a href="{U('admin/site/delete',array('id'=>$childValue['ID']))}" class="mr10 J_ajax_del">[删除]</a>
+				</td>
+			</tr>
+		<?php }?>
+		</tbody>
+		<?php }?>
+		<?php }?>
+	</table>
+	<table width="100%">
+		<tr class="ct"><td colspan="5" style="padding-left:38px;"><a data-type="nav_1" data-html="tbody" href="" id="J_add_root" class="link_add">{L('site_add')}</a></td></tr>
+	</table>
+</div>
+<div class="btn_wrap">
+	<div class="btn_wrap_pd">
+		<button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">提交</button>
+		<input name="navtype" type="hidden" value="{$navType}" >
+	</div>
+</div>	
+</form>
+
+
+</div>
+{template "admin","footer"}
+<script>
+/*
+root_tr_html 为“添加导航”html
+child_tr_html 为“添加二级导航”html
+*/
+var root_tr_html = '<tr>\
+                            <td><span class="zero_icon mr10"></span></td>\
+                                        <td>\
+                                            <input name="newdata[root_][ORDERNO]" type="text" value="" class="input length_0 mr10">\
+                                            <input name="newdata[root_][NAME]" type="text" class="input length_3 mr5" value="">\
+                                            <a style="display: none; " href="#" class="link_add J_addChild add_nav" data-html="tbody" data-id="temp_root_" data-type="nav_2">添加下级站点</a>\
+                                            <input type="hidden" name="newdata[root_][tempid]" value="temp_root_"/>\
+                                        </td>\
+                                        <td>\
+											<input name="newdata[root_][TITLE]" type="text" class="input length_3" value="">\
+                                        </td>\
+										<td>\
+											<input name="newdata[root_][CODE]" type="text" class="input length_1" value="">\
+										</td>\
+                                        <td class="tac"><input name="newdata[root_][STATUS]" type="checkbox" checked="checked"></td>\
+                                        <td>\
+                                            <a href="" class="mr5 J_newRow_del">[删除]</a>\
+                                        </td>\
+                                    </tr>',
+	child_tr_html = '<tr>\
+						<td></td>\
+						<td><span class="plus_icon"></span>\
+							<input name="newdata[child_][ORDERNO]" type="text" value="" class="input length_0 mr10">\
+                                            <input name="newdata[child_][NAME]" type="text" class="input length_3 mr5" value="">\
+                                        </td>\
+                                        <td>\
+											<input name="newdata[child_][TITLE]" type="text" class="input length_3" value="">\
+										</td>\
+                                        <td>\
+                                            <input name="newdata[child_][CODE]" type="text" class="input length_1" value="">\
+                                        </td>\
+                                        <td class="tac"><input name="newdata[child_][STATUS]" type="checkbox" value="1" checked=""></td>\
+                                        <td>\
+                                            <a href="" class="mr5 J_newRow_del">[删除]</a>\
+                                            <input type="hidden" name="newdata[child_][FATHERID]" value="id_"/>\
+                                        </td>\
+                                    </tr>';
+
+Wind.js(GV.JS_ROOT+ 'pages/admin/common/forumTree_table.js?v=' +GV.JS_VERSION);
+</script>
+<script type="text/javascript" src="{JS_PATH}/dev/util_libs/jquery.draggable.js"></script>
+</body>
+</html>
