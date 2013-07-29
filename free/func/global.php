@@ -8,7 +8,6 @@
 function str_cut($string, $length, $dot = true,$start=0,$charset='utf-8') {
 	return FreeString::substr($string, $start, $length, $charset, $dot = false);
 }
-
 /**
  *  读取配置
  **/
@@ -93,9 +92,8 @@ function U($action, $args = array(), $anchor = '', $rediect = '',$script='')
  */
 function E($et)
 {
-	return Free::loadClass($et, FREE_PATH . 'extension' . DIRECTORY_SEPARATOR);
+	return Free::loadClass($et, Free_PATH . 'extension' . DIRECTORY_SEPARATOR);
 }
-
 /**
  * 5.3 以上版本兼容 function lcfirst
 */
@@ -155,3 +153,6 @@ function setTplCache($name,$data)
 	$cache_data['data'] = $data;
 	return Free::getApp()->getComponent('cache')->set($name,$cache_data,$path,24*3600);
 }
+
+
+?>

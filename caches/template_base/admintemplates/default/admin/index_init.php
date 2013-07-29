@@ -1,8 +1,8 @@
 <?php defined('IN_FREE') or exit('No permission resources.'); ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 	<head>
-		<meta charset="utf-8" />
-		<title><?php echo L('admin_site_title');?></title>
+		<meta charset="UTF-8" />
+		<title>系统后台</title>
 		<link href="<?php echo CSS_PATH;?>admin_layout.css" rel="stylesheet" />
 		<style>
 			.fullScreen .content th{display:none;width:0;}
@@ -18,47 +18,51 @@
 			        document.body.innerHTML = '';
 			    }, 0);
 			}
-		</script>
+/*
+ *来自 head.htm
+*/
+//全局变量，是Global Variables不是Gay Video喔
+var GV = {
+	JS_ROOT : "<?php echo JS_PATH;?>",																									//js目录
+	JS_VERSION : "20130702",																										//js版本号
+	TOKEN : '<?php echo $csrf_token;?>',	//token ajax全局
+	REGION_CONFIG : {},
+	SCHOOL_CONFIG : {},
+	URL : {
+		LOGIN : '',																													//后台登录地址
+		IMAGE_RES: '[IMG_PATH}',																										//图片目录
+		//REGION : 'http://127.0.0.1:8099/index.php?m=misc&c=webData&a=area',					//地区
+		//SCHOOL : 'http://127.0.0.1:8099/index.php?m=misc&c=webData&a=school'				//学校
+	}
+};
+</script>
+<script src="<?php echo JS_PATH;?>wind.js"></script>
+<script src="<?php echo JS_PATH;?>jquery.js"></script>
+<script src="<?php echo JS_PATH;?>pages/admin/common/common.js"></script>
+
 	</head>
 	<body>
 		<div class="wrap">
 			<noscript><h1 class="noscript">您已禁用脚本，这样会导致页面不可用，请启用脚本后刷新页面</h1></noscript>
 			<table width="100%" height="100%" style="table-layout:fixed;">
 				<tr class="head">
-					<th><a href="<?php echo U('admin/index/init');?>" class="logo">管理中心</a></th>
+					<th><a href="admin.php" style="font-size:24px; color:#FFFFFF; font-weight:400;">管理中心</a></th>
 					<td>
 					<div class="nav">
 						<!-- 菜单异步获取，采用json格式，由js处理菜单展示结构 -->
 						<ul id="J_B_main_block">
-
+							
 						</ul>
 					</div>
 					<div class="login_info">
-                        <select name="current_showmodule" class="J_ajaxChange" class="select_1" href="<?php echo U('admin/index/changeSiteid');?>">
-                            <?php $n=1;if(is_array($sites)) foreach($sites AS $v) { ?>
-                            <option value="<?php echo $v['CODE'];?>" <?php if($v['CODE'] == $siteid) { ?>selected="selected"<?php } ?>><?php echo $v['NAME'];?></option>
-                                <?php $n=1;if(is_array($v['items'])) foreach($v['items'] AS $c) { ?>
-                                <option value="<?php echo $c['CODE'];?>" <?php if($c['CODE'] == $siteid) { ?>selected="selected"<?php } ?>>├<?php echo $c['NAME'];?></option>
-                                <?php $n++;}unset($n); ?>
-                            <?php $n++;}unset($n); ?>
-                        </select>
-                        <select name="current_showmodule" class="J_ajaxChange" class="select_1" href="<?php echo U('admin/index/changeShowmodule');?>">
-                            <option value="1" <?php if(FreeCookie::get('free_admin_showmodule') == 1) { ?>selected="selected"<?php } ?>>WEB</option>
-                            <option value="2" <?php if(FreeCookie::get('free_admin_showmodule') == 2) { ?>selected="selected"<?php } ?>>WAP</option>
-                        </select>
-                        <?php if(FreeCookie::get('free_admin_showmodule') == '2') { ?>
-						<a href="<?php echo U('', array(), '', '', 'wap');?>" class="home" target="_blank" id="web_frontend">前台首页</a>
-                        <?php } else { ?>
-                        <a href="<?php echo U('', array(), '', '', 'web');?>" class="home" target="_blank" id="wap_frontend">前台首页</a>
-                        <?php } ?>
-                        <span class="mr10">管理员：  <?php echo $adminuser['username'];?> </span><a href="<?php echo U('admin/index/loginout');?>" class="mr10">[注销]</a>
+						<a href="<?php echo WEB_PATH;?>" class="home" target="_blank">前台首页</a><span class="mr10">管理员： admin</span><a href="{U('admin/index/loginout'}" class="mr10">[注销]</a>
 					</div></td>
 				</tr>
 				<tr class="tab">
 					<th>
 					<div class="search">
-						<input id="keyword" size="15" placeholder="Hi，freePro！" type="text">
-						<button type="button" name="keyword" id="J_search" value="">搜</button>
+						<input size="15" placeholder="Hi！" id="J_search_keyword" type="text">
+						<button type="button" name="keyword" id="J_search" value="" data-url="http://127.0.0.1:8099/phpwindv9/admin.php?c=find">搜索</button>
 					</div></th>
 					<td>
 					<div id="B_tabA" class="tabA">
@@ -101,7 +105,7 @@
 				</tr>
 			</table>
 		</div>
-<?php include $this->_view->templateResolve("admin","footer",$__style__,$__app__); ?>
+<script src="<?php echo JS_PATH;?>pages/admin/common/common.js"></script>
 <script>
 //iframe 加载事件
 var iframe_default = document.getElementById('iframe_default');
@@ -130,6 +134,9 @@ $(function(){
 		html.push('<li><a href="" title="'+ o.tip +'" data-id="'+ o.id +'">'+ o.name +'</a></li>');
 	});
 	$('#J_B_main_block').html(html.join(''));
+
+	//后台位在第一个导航
+	$('#J_B_main_block li:first > a').click();
 });
 
 function checkMenuNext() {
@@ -244,47 +251,87 @@ $('#B_menubar').on('click','a',function(e) {
 	$('#B_history li').removeClass('current');
 	var data_id = $(this).attr('data-id'),li = $('#B_history li[data-id='+ data_id +']');
 	var href = this.href;
+
+
+	iframeJudge({
+		elem : $this,
+		href : href,
+		id : data_id
+	});
+	
+});
+
+
+/*
+ * 搜索
+*/
+var search_keyword = $('#J_search_keyword'),
+	search = $('#J_search');
+search.on('click', function(e){
+	e.preventDefault();
+	var $this = $(this),
+		search_val = $.trim(search_keyword.val());
+	if(search_val) {
+		iframeJudge({
+			elem : $this,
+			href : $this.data('url') + '&keyword=' + search_val,
+			id : 'search'
+		});
+	}
+});
+//回车搜索
+search_keyword.on('keydown', function(e){
+	if(e.keyCode == 13) {
+		search.click();
+	}
+});
+
+
+//判断显示或创建iframe
+function iframeJudge(options){
+	var elem = options.elem,
+		href = options.href,
+		id = options.id,
+		li = $('#B_history li[data-id='+ id +']');
+
 	if(li.length > 0) {
 		//如果是已经存在的iframe，则显示并让选项卡高亮,并不显示loading
-		var iframe = $('#iframe_'+ data_id);
+		var iframe = $('#iframe_'+ id);
 		$('#loading').hide();
 		li.addClass('current');
 		if( iframe[0].contentWindow && iframe[0].contentWindow.location.href !== href ) {
 			iframe[0].contentWindow.location.href = href;
 		}
 		$('#B_frame iframe').hide();
-		$('#iframe_'+ data_id).show();
+		$('#iframe_'+ id).show();
 		showTab(li);//计算此tab的位置，如果不在屏幕内，则移动导航位置
 	} else {
-		//否则动态创建一个并加以标识
+		//创建一个并加以标识
 		var	iframeAttr = {
-				src			: href,
-				id			: 'iframe_' + data_id,
-				frameborder	: '0',
-				scrolling	: 'auto',
-				height		: '100%',
-				width		: '100%'
-			};
+			src			: href,
+			id			: 'iframe_' + id,
+			frameborder	: '0',
+			scrolling	: 'auto',
+			height		: '100%',
+			width		: '100%'
+		};
 		var iframe = $('<iframe/>').prop(iframeAttr).appendTo('#B_frame');
+
 		$(iframe[0].contentWindow.document).ready(function() {
 			$('#B_frame iframe').hide();
 			$('#loading').hide();
-			var li = $('<li tabindex="0"><span><a>'+ $this.html() +'</a><a class="del" title="关闭此页">关闭</a></span></li>').attr('data-id',data_id).addClass('current');
-			li.siblings().removeClass('current');
+			var li = $('<li tabindex="0"><span><a>'+ elem.html() +'</a><a class="del" title="关闭此页">关闭</a></span></li>').attr('data-id',id).addClass('current');
+				li.siblings().removeClass('current');
 			li.appendTo('#B_history');
 			showTab(li);//计算此tab的位置，如果不在屏幕内，则移动导航位置
 			//$(this).show().unbind('load');
-			
-			//计算提交按钮是否固定底部
-			/*var vis_height = $(window).height() - 76,	//窗口高度减去顶部固定高度
-				iframe_body = $('#iframe_' + data_id)[0].contentWindow.document.body;
-			if(vis_height > $('#iframe_' + data_id)[0].contentWindow.document.body.scrollHeight) {
-				$(iframe_body).find('div.btn_wrap').removeClass('btn_wrap');
-			}*/
-			
 		});
+		
+		
 	}
-});
+
+	
+}
 
 //顶部点击一个tab页
 $('#B_history').on('click focus','li',function(e) {
@@ -320,7 +367,8 @@ $('#J_refresh').click(function(e) {
 	e.stopPropagation();
 	var id = $('#B_history .current').attr('data-id'),iframe = $('#iframe_'+ id);
 	if(iframe[0].contentWindow) {
-		iframe[0].contentWindow.location.reload();
+		//common.js
+		reloadPage(iframe[0].contentWindow);
 	}
 });
 
@@ -358,9 +406,9 @@ function showTab(li) {
 	if(li.length) {
 		var ul = $('#B_history'),
 			li_offset = li.offset(),
-			li_width = li.outerWidth(),
-			next_left = $('#J_next').offset().left,//右边按钮的界限位置
-			prev_right = $('#J_prev').offset().left + $('#J_prev').outerWidth();//左边按钮的界限位置
+			li_width = li.outerWidth(true),
+			next_left = $('#J_next').offset().left - 9,//右边按钮的界限位置
+			prev_right = $('#J_prev').offset().left + $('#J_prev').outerWidth(true);//左边按钮的界限位置
 		if(li_offset.left + li_width > next_left) {//如果将要移动的元素在不可见的右边，则需要移动
 			var distance = li_offset.left + li_width - next_left;//计算当前父元素的右边距离，算出右移多少像素
 			ul.animate({left:'-='+distance},200,'swing');
@@ -372,34 +420,95 @@ function showTab(li) {
 	}
 }
 
-//增强体验，如果支持全屏，则使用更完美的全屏方案
-/*Wind.use('jquery.requestFullScreen',function () {
-	if(fullScreenApi.supportsFullScreen) {
-		$('#J_fullScreen').unbind('click').one('click',function(e) {
-			e.preventDefault();
-			$('body').requestFullScreen();
-		});
-	}
-})*/
+(function(){
+	//iframe内触发菜单
 
-//选择展现方式
-$('.J_ajaxChange').change(function(e) {
-	e.preventDefault();
-	e.stopPropagation();
-	var choose_value = $(this).val();
-    $.getJSON($(this).attr('href'), {choose_value: choose_value}).done(function(data) {
-	    if(data.state === 'success') {
-		    if(data.referer) {
-			    location.href = data.referer;
-			}else {
-				reloadPage(window);
+	var par_menu_main = $('#J_B_main_block'),
+		par_menu_side = $('#B_menubar')
+	//查询导航数据
+	window.eachSubmenu = function (data, id, par, level, href){
+		for(i in data) {
+			if(level == 2) {
+				if(i == par) {
+					//一级
+					setMenuMain(par_menu_main.find('a[data-id='+ par +']'));
+					eachSubmenu(data[par]['items'], id, par, level, href);
+					break;
+				}else if(i == id){
+					//二级
+					setMenuSide(data, id, par, level, href);
+				}
+
+			}else if(level == 3) {
+				if(i == par) {
+					//匹配父导航
+					var root = data[i]['parent'];
+					setMenuMain(par_menu_main.find('a[data-id='+ data[i]['parent'] +']'));
+					setMenuSide(SUBMENU_CONFIG[root]['items'], id, par, level, href);
+					break;
+				}else{
+					//父导航不匹配
+					var items = data[i]['items'];
+					if(items) {
+						eachSubmenu(items, id, par, level, href)
+					}
+
+				}
 			}
-		}else if( data.state === 'fail' ) {
-			Wind.dialog.alert(data.message);
+			
+			
 		}
-	});
+	};
 
-});
+	//设置顶部导航
+	function setMenuMain(elem){
+		elem.parent().addClass('current').siblings().removeClass('current');
+	};
+
+	//设置左侧导航
+	function setMenuSide(data, id, par, level, href){
+
+		var arr  = [],			//左侧一级导航数据
+			child_arr = [];		//左侧二级导航数据
+
+		//循环数据
+		$.each(data, function(i, o){
+			var cls = (o.id == id ? 'current' : '');
+			
+			//添加一级数据
+			arr.push('<dt class="'+ cls +'"><a href="'+ o.url +'" data-id="'+ o.id +'">'+ o.name +'</a></dt>');
+
+			if(level == 3 && i == par){
+				//进入二级导航
+				$.each(o['items'], function(i, o){
+					child_arr.push('<li><a href="'+ o.url +'" data-id="'+ o.id +'">'+ o.name +'</a></li>');
+				});
+
+				var style = (o.id == par ? '' : 'display:none;');
+
+				//并入一级
+				arr.push('<dd style="'+ style +'"><ul>'+child_arr.join('')+'</ul></dd>');
+			}
+			
+		});
+
+		//show_left_menu(data_list['items']);
+		par_menu_side.html(arr.join('')).attr('data-id', par);
+
+		////检查是否应该出现上一页、下一页
+		checkMenuNext();
+
+		var side_item = $('#B_menubar').find('a[data-id='+ id +']');
+
+		//点击导航展开iframe
+		iframeJudge({
+			elem : side_item,
+			href : href,
+			id : id
+		});
+		
+	};
+})();
 </script>
 	</body>
 </html>

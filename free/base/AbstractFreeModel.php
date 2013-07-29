@@ -202,9 +202,9 @@ Abstract class AbstractFreeModel extends FreeBase{
                 if(!is_numeric($end)) $end   =  strtotime($end);
                 return $_SERVER['REQUEST_TIME'] >= $start && $_SERVER['REQUEST_TIME'] <= $end;
             case 'ip_allow': // IP 操作许可验证
-                return in_array(get_client_ip(),explode(',',$val[1]));
+                return in_array($this->getRequest()->getClientIp(),explode(',',$val[1]));
             case 'ip_deny': // IP 操作禁止验证
-                return !in_array(get_client_ip(),explode(',',$val[1]));
+                return !in_array($this->getRequest()->getClientIp(),explode(',',$val[1]));
             case 'unique': // 验证某个值是否唯一
 				$where = array($val[0] => $data[$val[0]]);
                 if(isset($val[6]))

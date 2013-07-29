@@ -149,6 +149,6 @@ var root_tr_html = '<tr>\
 
 Wind.js(GV.JS_ROOT+ 'pages/admin/common/forumTree_table.js?v=' +GV.JS_VERSION);
 </script>
-<script type="text/javascript" src="<?php echo JS_PATH;?>/dev/util_libs/jquery.draggable.js"></script>
+<script type="text/javascript" src="<?php echo JS_PATH;?>util_libs/draggable.js"></script>
 </body>
 </html>

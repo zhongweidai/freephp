@@ -7,5 +7,10 @@
 <body>
 
 	<div style=" position: relative;top:5%;; left:4%; width:90%; background-color:#CCCCCC; color:#FF3333; text-align:center; padding:5px;">感谢使用freePHP!</div>
+	<form action="#" method="post">
+	<input name="ff" />
+	{php $selects=array(1=>test1,2=>test2,3=>test3)}
+	{form:select selects="$selects" checked="1"}
+	</form>
 </body>
 </html>

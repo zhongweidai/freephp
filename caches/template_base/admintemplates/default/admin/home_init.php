@@ -47,9 +47,9 @@
 	<h2 class="h_a">开发团队</h2>
 	<div class="home_info" id="home_devteam">
         <ul>
-            <li><em>版权所有</em><span>武汉天喻通讯技术有限公司</span></li>
+            <li><em>版权所有</em><span></span></li>
             <li><em>负责人</em><span>代中伟</span></li>
-            <li><em>产品研发</em><span>习云芳、方鹏、邹恒、张俊、熊志刚、邱慧剑、朱辉、陈兵等</span></li>
+            <li><em>产品研发</em><span>张俊、熊志刚、朱辉、陈兵等</span></li>
             <li><em>UED</em><span></span></li>
             <li><em>市场运营</em><span></span></li>
         </ul>

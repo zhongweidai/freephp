@@ -14,10 +14,10 @@ class SiteServerBase extends FreeProServer
 		$this->model = M('site','admin');
 		//array(field,rule,message,condition,function,type,where)
 		$this->model->setValidate(array(
-			//array('PASSWORD','REPASSWORD','{%email_illegal}',1,'confirm',WhtyModel::MODEL_BOTH),
-			//array('NAME','4,20','{%role_already_exists}',1,'unique',WhtyModel::MODEL_BOTH),
-			array('CODE','/^[A-Za-z0-9\-]+$/','站点ID不能为空或格式不正确',1,'regex',WhtyModel::MODEL_BOTH),
-			array('CODE','4,20',"{%site_code_already_exists}",1,'unique',WhtyModel::MODEL_BOTH),
+			//array('PASSWORD','REPASSWORD','{%email_illegal}',1,'confirm',FreeModel::MODEL_BOTH),
+			//array('NAME','4,20','{%role_already_exists}',1,'unique',FreeModel::MODEL_BOTH),
+			array('CODE','/^[A-Za-z0-9\-]+$/','站点ID不能为空或格式不正确',1,'regex',FreeModel::MODEL_BOTH),
+			array('CODE','4,20',"{%site_code_already_exists}",1,'unique',FreeModel::MODEL_BOTH),
 		));
 	}
 	

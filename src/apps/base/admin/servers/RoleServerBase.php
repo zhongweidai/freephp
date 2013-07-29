@@ -13,8 +13,8 @@ class RoleServerBase extends FreeProServer
 	{
 		$this->model = M('admin_role','admin');
 		//array(field,rule,message,condition,function,type,where)
-		$this->model->setValidate(array(//array('PASSWORD','REPASSWORD','{%email_illegal}',1,'confirm',WhtyModel::MODEL_BOTH),
-			array('NAME','4,20','{%role_already_exists}',1,'unique',WhtyModel::MODEL_BOTH),
+		$this->model->setValidate(array(//array('PASSWORD','REPASSWORD','{%email_illegal}',1,'confirm',FreeModel::MODEL_BOTH),
+			array('NAME','4,20','{%role_already_exists}',1,'unique',FreeModel::MODEL_BOTH),
 		));
 	}
 	

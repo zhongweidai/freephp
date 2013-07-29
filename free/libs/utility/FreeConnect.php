@@ -18,7 +18,6 @@ class FreeConnect {
 	*  @return string			返回字符串
 	*/
 	static public function ucFopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $ip = '', $timeout = '', $block = TRUE) {
-		$start = microtime();
 		empty($timeout) && $timeout = CONNECT_TIMEOUT;
 		if ($post) {
 			$return = '';
@@ -48,10 +47,10 @@ class FreeConnect {
 				//write_interface_logs('fsocket', $url, '', $post, $start);
 				return ''; //note $errstr : $errno \r\n
 			} else {
-				//stream_set_blocking($fp, $block);
-				//stream_set_timeout($fp, $timeout);
+				stream_set_blocking($fp, $block);
+				stream_set_timeout($fp, $timeout);
 				@fwrite($fp, $out);
-				//$status = stream_get_meta_data($fp);
+				$status = stream_get_meta_data($fp);
 				//print_r(fread($fp, '118192'));exit;
 				if (!$status['timed_out']) {
 					while (!feof($fp)) {
@@ -71,15 +70,12 @@ class FreeConnect {
 					}
 				}
 				@fclose($fp);
-				//写入日志
-				self::toLog($start,$url,$post);
 				return $return;
 			}
 		}
 		else
 		{	
 			$result =self::curlOpen($url, $limit, $post, $cookie, $bysocket, $ip, $timeout, $block);
-			self::toLog($start,$url,$post);
 			return $result; 
 		}
 	}
@@ -118,14 +114,6 @@ class FreeConnect {
 		return $data;
 	}
 	
-	static public function toLog($start,$url,$param)
-	{
-		if( CONNECT_DEBUG_TIME != 0)
-		{
-			
-		}
-		return true;
-	}
 	/**
 	* curl rpc
 	* @param unknown_type $url
@@ -140,7 +128,6 @@ class FreeConnect {
 		{
 			die('url is null');
 		}
-		$start = microtime();
 		empty($timeout) && $timeout = CONNECT_TIMEOUT;
 		$urlarr = parse_url($url);
 		$host = $urlarr['host'];
@@ -167,43 +154,9 @@ class FreeConnect {
 		$data = curl_exec($ch);
 		curl_close($ch);
 		$data = json_decode($data, true);
-		self::toLog($start,$url,$request);
 		return $data;
 	}
 	
-	/**
-	 * 教育平台接口调用函数
-	 *
-	 * @param 接口地址 $interface
-	 * @param 接口编号 $method
-	 * @param 接口参数 $params
-	 * @param unknown_type $is_encode
-	 * @param unknown_type $is_resources
-	 * @return unknown
-	 */
-	static public function eduPost($interface, $method, $params = array(), $is_encode = 1, $is_resources = 0){
-		$request = array();
-		$request['mac'] = md5(time());
-		$request['head'] = array('serialNumber' => time(), 'method' => $method, 'version' => '1');
-		if ($is_encode) {
-			$authcode = array('password','newpassword');
-			
-			foreach ($params as $k => $val) {
-				if( in_array(strtolower($k), $authcode) && !empty($val)){
-						$params[$k] = md5($val);
-				}
-				if (in_array(strtolower($k), $authcode) && !empty($val)) {
-					$params[$k] = authcode($params[$k], 'ENCODE');
-				}
-			}
-		}
-		$request['body'] = $params;
 	
-	    $request = json_encode($request);
-	
-	    $return = self::rpcFopen($interface, $request);
-
-	    return $return;
-	}
 	
 }

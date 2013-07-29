@@ -13,9 +13,9 @@ return array (
 		'controller-path' => 'admin',
 		'route' => 'admin/index/init',
 		'filter'=>array('admin_filter'=>'src/library/AdminFilter'),
-		'js_path' => '/myfr/freephp/statics/admin/js/', 
-		'css_path' => '/myfr/freephp/statics/admin/css/', 
-		'img_path' => '/myfr/freephp/statics/admin/images/', 
+		'js_path' => '/free/statics/admin/js/dev/', 
+		'css_path' => '/free/statics/admin/css/', 
+		'img_path' => '/free/statics/admin/images/', 
 		'is_admin_log' => 1, 
 	),
 );

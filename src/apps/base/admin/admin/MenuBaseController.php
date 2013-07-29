@@ -111,7 +111,7 @@ class MenuBaseController extends AdminFrontController
             $this->assign('id',$id);
 			$menu = $admin_menu_server->get($id);
 			$this->assign('menu',$menu);
-			$this->assign('select_menu',$admin_menu_server->selectMenu(0,$id));
+			$this->assign('select_menu',$admin_menu_server->selectMenu(0,$menu['FATHERID']));
 			$this->template();
 		}
 	}

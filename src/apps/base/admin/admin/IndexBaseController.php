@@ -68,12 +68,12 @@ class IndexBaseController extends AdminFrontController
     {
         if ($siteid = $this->getRequest()->getGet('choose_value'))
         {
-            WhtyCookie::set('whty_siteid', $siteid);
+            FreeCookie::set('whty_siteid', $siteid);
             $this->showMessage(L('operation_success'));
         }
         else
         {
-            WhtyCookie::set('whty_admin_showmodule', 1);
+            FreeCookie::set('whty_admin_showmodule', 1);
             $this->showMessage(L('operation_failure'),'',0);
         }
     }
@@ -83,12 +83,12 @@ class IndexBaseController extends AdminFrontController
     {
         if ($showmodule = $this->getRequest()->getGet('choose_value'))
         {
-            WhtyCookie::set('whty_admin_showmodule', $showmodule);
+            FreeCookie::set('whty_admin_showmodule', $showmodule);
             $this->showMessage(L('operation_success'));
         }
         else
         {
-            WhtyCookie::set('whty_admin_showmodule', 1);
+            FreeCookie::set('whty_admin_showmodule', 1);
             $this->showMessage(L('operation_failure'),'',0);
         }
     }

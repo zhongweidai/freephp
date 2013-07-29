@@ -33,7 +33,7 @@ class AuthBaseController extends AdminFrontController
 		{
 			$id = $this->getRequest()->getPost('id');
 			$id = !empty($id) ? intval($id) : $this->showMessage(L('param_error'),'',0);
-			$admin = WhtyString::trim($this->getRequest()->getPost('info'));
+			$admin = FreeString::trim($this->getRequest()->getPost('info'));
 			if(!empty($admin['PASSWORD']) && $admin['PASSWORD'] != $this->getRequest()->getPost('REPASSWORD'))
 			{
 				$this->showMessage(L('passwords_not_match'),'',0);
@@ -69,7 +69,7 @@ class AuthBaseController extends AdminFrontController
 		$admin_server = S('Admin',$this->_module);
 		if($this->getRequest()->isPost())
 		{
-			$admin = WhtyString::trim($this->getRequest()->getPost('info'));
+			$admin = FreeString::trim($this->getRequest()->getPost('info'));
 			if($admin['PASSWORD'] != $this->getRequest()->getPost('REPASSWORD') && !empty($admin['PASSWORD']))
 			{
 				$this->showMessage(L('passwords_not_match'),'',0);

@@ -12,7 +12,7 @@ return array (
 		'autoconnect' => 0,
 		),
 	'mysql' => array (
-        'database' => 'free',
+        'database' => 'whty3',
         'hostname' => '127.0.0.1',
 		'username' => 'root',
 		'password' => '',

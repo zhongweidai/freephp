@@ -87,6 +87,7 @@ class FreeTemplate extends AbstractFreeTemplate{
         $str = preg_replace("/\{([A-Z_\x7f-\xff][A-Z0-9_\x7f-\xff]*)\}/s", "<?php echo \\1;?>", $str);
         $str = preg_replace("/\{pc:(\w+)\s+([^}]+)\}/ie", "self::pcTag('$1','$2', '$0')", $str);
         $str = preg_replace("/\{\/pc\}/ie", "self::endPcTag()", $str);
+        $str = preg_replace("/\{form:(\w+)\s+([^}]+)\}/ie", "self::formTag('$1','$2')", $str);
 		$str = preg_replace("/\<\/form\>/ie", "self::addCsrf()" , $str);
 		
         $str = "<?php defined('IN_FREE') or exit('No permission resources.'); ?>" . $str;
@@ -232,13 +233,117 @@ class FreeTemplate extends AbstractFreeTemplate{
         return "<" . "?php " . $str . "?" . ">";
     }
 
+    
     /**
      * PC标签结束
      */
-    static private function endPcTag() {
+    private static function endPcTag() {
         /**return '<?php if(defined(\'IN_ADMIN\') && !defined(\'HTML\')) {echo \'</div>\';}?>';
 		**/
     }
+    /**
+     * 表单标签解析
+     */
+    private static function formTag($op, $data)
+    {
+    	preg_match_all("/([a-z]+)\=[\"]?([^\"]+)[\"]?/i", stripslashes($data), $matches, PREG_SET_ORDER);
+    	$datas = array();
+    	$eval = '';
+    	foreach ($matches as $v) 
+    	{
+    		$eval .= '$datas[\'' . $v[1] . '\'] = ' . $v[2] . ';';
+    	}
+    	echo  $eval;
+    	eval($eval);
+    	
+    	dump($datas);exit;
+    	$parseStr   = '';
+    	$tools = array('select','editor','radio','checkbox');
+    	if (in_array($op, $tools)) 
+    	{
+    		switch($op)
+    		{
+    			case 'select':
+    				$name       = $datas['name'];
+    				$options    = $datas['options'];
+    				$values     = $datas['values'];
+    				$output     = $datas['output'];
+    				$multiple   = $datas['multiple'];
+    				$id         = $datas['id'];
+    				$size       = $datas['size'];
+    				$first      = $datas['first'];
+    				$selected   = $datas['selected'];
+    				$style      = $datas['style'];
+    				$ondblclick = $datas['dblclick'];
+    				$onchange	= $datas['change'];
+    				
+    				if(!empty($multiple)) {
+    					$parseStr = '<select id="'.$id.'" name="'.$name.'" ondblclick="'.$ondblclick.'" onchange="'.$onchange.'" multiple="multiple" class="'.$style.'" size="'.$size.'" >';
+    				}else {
+    					$parseStr = '<select id="'.$id.'" name="'.$name.'" onchange="'.$onchange.'" ondblclick="'.$ondblclick.'" class="'.$style.'" >';
+    				}
+    				if(!empty($first)) {
+    					$parseStr .= '<option value="" >'.$first.'</option>';
+    				}
+    				if(!empty($options)) {
+    					$parseStr   .= '<?php  foreach($'.$options.' as $key=>$val) { ?>';
+    					if(!empty($selected)) {
+    						$parseStr   .= '<?php if(!empty($'.$selected.') && ($'.$selected.' == $key || in_array($key,$'.$selected.'))) { ?>';
+    						$parseStr   .= '<option selected="selected" value="<?php echo $key ?>"><?php echo $val ?></option>';
+    						$parseStr   .= '<?php }else { ?><option value="<?php echo $key ?>"><?php echo $val ?></option>';
+    						$parseStr   .= '<?php } ?>';
+    					}else {
+    						$parseStr   .= '<option value="<?php echo $key ?>"><?php echo $val ?></option>';
+    					}
+    					$parseStr   .= '<?php } ?>';
+    				}else if(!empty($values)) {
+    					$parseStr   .= '<?php  for($i=0;$i<count($'.$values.');$i++) { ?>';
+    					if(!empty($selected)) {
+    						$parseStr   .= '<?php if(isset($'.$selected.') && ((is_string($'.$selected.') && $'.$selected.' == $'.$values.'[$i]) || (is_array($'.$selected.') && in_array($'.$values.'[$i],$'.$selected.')))) { ?>';
+    						$parseStr   .= '<option selected="selected" value="<?php echo $'.$values.'[$i] ?>"><?php echo $'.$output.'[$i] ?></option>';
+    						$parseStr   .= '<?php }else { ?><option value="<?php echo $'.$values.'[$i] ?>"><?php echo $'.$output.'[$i] ?></option>';
+    						$parseStr   .= '<?php } ?>';
+    					}else {
+    						$parseStr   .= '<option value="<?php echo $'.$values.'[$i] ?>"><?php echo $'.$output.'[$i] ?></option>';
+    					}
+    					$parseStr   .= '<?php } ?>';
+    				}
+    				$parseStr   .= '</select>';
+    				
+    				break;
+    			case 'radio':
+    				$name       = $datas['name'];
+    				$radios     = $datas['radios'];
+    				$checked    = $datas['checked'];
+    				$separator  = $datas['separator'];
+    				
+    				foreach($radios as $key=>$val) {
+    					if($checked == $key ) {
+    						$parseStr .= '<input type="radio" checked="checked" name="'.$name.'[]" value="'.$key.'">'.$val.$separator;
+    					}else {
+    						$parseStr .= '<input type="radio" name="'.$name.'[]" value="'.$key.'">'.$val.$separator;
+    					}
+    				}
+    				break;
+    			case 'checkbox':
+    				$name       = $datas['name'];
+    				$checkboxes = $datas['checkboxes'];
+    				$checked    = $datas['checked'];
+    				$separator  = $datas['separator'];
+    				$parseStr   = '';
+    				foreach($checkboxes as $key=>$val) {
+    					if($checked == $key  || in_array($key,$checked) ) {
+    						$parseStr .= '<input type="checkbox" checked="checked" name="'.$name.'[]" value="'.$key.'">'.$val.$separator;
+    					}else {
+    						$parseStr .= '<input type="checkbox" name="'.$name.'[]" value="'.$key.'">'.$val.$separator;
+    					}
+    				}
+    		}
+    			
+    	}
+    	return $parseStr;
+    }
+    
 
     /**
      * 转换数据为HTML代码

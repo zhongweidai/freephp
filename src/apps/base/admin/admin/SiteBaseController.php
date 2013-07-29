@@ -29,7 +29,7 @@ class SiteBaseController extends AdminFrontController
 		{
 			$id = $this->getRequest()->getPost('id');
 			$id = !empty($id) ? intval($id) : $this->showMessage(L('param_error'),'',0);
-			$sites = WhtyString::trim($this->getRequest()->getPost('info'));
+			$sites = FreeString::trim($this->getRequest()->getPost('info'));
 			$attachment = S('Attachment','Attachment');
 			if(!empty($_FILES['icon']['name']))
 			{

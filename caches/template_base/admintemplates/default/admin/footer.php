@@ -1,7 +1,7 @@
 <?php defined('IN_FREE') or exit('No permission resources.'); ?><script>
 //全局变量，是Global Variables不是Gay Video喔
 var GV = {
-	JS_ROOT : "<?php echo JS_PATH;?>dev/",																									//js目录
+	JS_ROOT : "<?php echo JS_PATH;?>",																									//js目录
 	JS_VERSION : "{@G:c.version}",																										//js版本号
 	TOKEN : '<?php echo $csrf_token;?>',	//token ajax全局
 	REGION_CONFIG : {},
@@ -13,6 +13,6 @@ var GV = {
 	}
 };
 </script>
-<script src="<?php echo JS_PATH;?>core.js"></script>
+<script src="<?php echo JS_PATH;?>wind.js"></script>
 <script src="<?php echo JS_PATH;?>jquery.js"></script>
 <script src="<?php echo JS_PATH;?>pages/admin/common/common.js"></script>

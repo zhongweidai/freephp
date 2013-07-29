@@ -30,7 +30,7 @@ class FreeComponent {
 			{
 				if(file_exists($path))
 				{
-					include_once $path;
+					include $path;
 					$class_name = substr(strrchr($this->_paths[$name],'/'),1);
 					$this->_classes[$key] = new $class_name($option);
 				}else{

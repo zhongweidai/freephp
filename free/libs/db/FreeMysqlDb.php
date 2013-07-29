@@ -499,7 +499,7 @@ final class FreeMysqlDb extends AbstractFreeDb {
         if($this->_linkID) {
             $value = mysql_real_escape_string($value,$this->_linkID);
         }else{
-            $value = mysql_escape_string($value);
+            $value = mysql_real_escape_string($value);
         }
 		if ($quotation) {
 			$q = '\'';

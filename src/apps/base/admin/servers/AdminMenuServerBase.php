@@ -111,7 +111,7 @@ class AdminMenuServerBase extends FreeProServer
                 continue;
             }
             $array[$key] = $val;
-            if($val['ID'] == $p_id)
+            if($val['ID'] == $id)
             {
                 $array[$key]['selected'] = 'selected';
             }

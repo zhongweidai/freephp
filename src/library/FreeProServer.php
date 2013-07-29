@@ -12,6 +12,11 @@ class FreeProServer extends AbstractFreeServer
 	{
 	
 	}
+	
+	public function getModel()
+	{
+		return $this->model;	
+	}
 }
 
 /**
@@ -25,12 +30,12 @@ class FreeProTag extends FreeBase implements IFreeTag
 {
 	public function count($data)
 	{
-	
+		return 0;
 	}
     
     public function getSiteId()
     {
-        return Wxcity::getApp()->getSiteId();
+        return FreePro::getApp()->getSiteId();
     }
 }
 ?>

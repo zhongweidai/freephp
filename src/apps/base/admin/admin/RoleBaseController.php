@@ -1,6 +1,6 @@
 <?php
 
-defined('IN_WHTY') or exit('No permission resources.');
+defined('IN_FREE') or exit('No permission resources.');
 
 class RoleBaseController extends AdminFrontController
 {
@@ -28,7 +28,7 @@ class RoleBaseController extends AdminFrontController
 		{
 			$id = $this->getRequest()->getPost('id');
 			$id = !empty($id) ? intval($id) : $this->showMessage(L('param_error'),'',0);
-			$roles['PRIV'] = implode(',',WhtyString::trim($this->getRequest()->getPost('menus')));
+			$roles['PRIV'] = implode(',',FreeString::trim($this->getRequest()->getPost('menus')));
             $roles['STATUS'] = $this->getRequest()->getPost('status') ? 1 : 0;
 			if($this->server->edit($roles,array('ID'=>$id)))
 			{
@@ -66,7 +66,7 @@ class RoleBaseController extends AdminFrontController
 	{
 		if($this->getRequest()->isPost())
 		{
-			$roles['PRIV'] = implode(',',WhtyString::trim($this->getRequest()->getPost('menus')));
+			$roles['PRIV'] = implode(',',FreeString::trim($this->getRequest()->getPost('menus')));
 			$roles['NAME'] = $this->getRequest()->getPost('rolename');
             $roles['STATUS'] = $this->getRequest()->getPost('status') ? 1 : 0;
 			if($this->server->add($roles))

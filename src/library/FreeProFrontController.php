@@ -37,7 +37,7 @@ class FreeProFrontController extends FreeController
 		if (defined('SITEID')) {
 			$siteid = SITEID;
 		} else {
-			$siteid = WhtyCookie::get('whty_siteid');
+			$siteid = FreeCookie::get('whty_siteid');
 		}
 		return $siteid ? $siteid : DEFAULT_CITY;
 	}
